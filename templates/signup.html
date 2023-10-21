@@ -16,9 +16,189 @@
         /* oscurecer la imagen */
         background-blend-mode: multiply;
         background-color: rgba(0, 0, 0, 0.5);
-
     }
 
+    .transparent-card {
+        background: transparent;
+        backdrop-filter: blur(3px);
+        border: 2px solid var(--color-background);
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .title {
+        color: var(--color-background);
+        font-weight: 800;
+        margin-bottom: 2rem;
+    }
+
+    .btn-accounts {
+        background-color: var(--color-background);
+        border: none;
+        color: #202637;
+        font-weight: 800;
+        padding: 0.8rem 1rem;
+        border-radius: 40px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .btn-accounts:hover {
+        background-color: var(--color-background);
+        border: none;
+        border-radius: 40px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .btn-accounts:focus {
+        background-color: var(--color-background);
+        border: none;
+        border-radius: 40px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .form-control.is-invalid,
+    .was-validated .form-control:invalid {
+        border: 2px solid rgb(244, 67, 54);
+        box-shadow: 0 0 0 0.25rem rgb(244, 67, 54, 0.25);
+        background-image: none;
+    }
+
+    .form-control.is-valid,
+    .was-validated .form-control:valid {
+        border: 2px solid rgb(113, 178, 103);
+        box-shadow: 0 0 0 0.25rem rgb(113, 178, 103, 0.25);
+        background-image: none;
+    }
+
+    /* hover */
+    .form-control.is-valid:hover,
+    .was-validated .form-control:valid:hover {
+        border: 2px solid rgb(113, 178, 103);
+        box-shadow: 0 0 0 0.25rem rgb(113, 178, 103, 0.25);
+        background-image: none;
+    }
+
+    .form-control.is-invalid:hover,
+    .was-validated .form-control:invalid:hover {
+        border: 2px solid rgb(244, 67, 54);
+        box-shadow: 0 0 0 0.25rem rgb(244, 67, 54, 0.25);
+        background-image: none;
+    }
+
+    .form-control.is-valid:focus,
+    .was-validated .form-control:valid:focus {
+        box-shadow: 0 0 0 0.25rem rgb(113, 178, 103, 0.25);
+        border: 2px solid rgb(113, 178, 103);
+        background-image: none;
+    }
+
+    .form-control.is-invalid:focus,
+    .was-validated .form-control:invalid:focus {
+        border: 2px solid rgb(244, 67, 54);
+        box-shadow: 0 0 0 0.25rem rgb(244, 67, 54, 0.25);
+        background-image: none;
+    }
+
+
+    #small-text {
+        color: var(--color-background);
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    #text-links {
+        text-decoration: none;
+        color: var(--color-background);
+        font-size: 1rem;
+    }
+
+    #text-links:hover {
+        text-decoration-line: underline;
+    }
+
+    .user-form {
+        background: transparent;
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        border: 2px solid var(--color-background);
+        border-radius: 40px;
+        color: var(--color-background);
+        padding: 0.8rem 1rem;
+        /* mas padding para que no se vea el texto pegado al borde */
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+        font-size: 1rem;
+    }
+
+    .user-form:focus {
+        background: transparent;
+        outline: none;
+        border: 2px solid var(--color-background);
+        border-radius: 40px;
+        box-shadow: none;
+        color: var(--color-background);
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .user-form:hover {
+        background: transparent;
+        outline: none;
+        border: 2px solid var(--color-background);
+        border-radius: 40px;
+        box-shadow: none;
+        color: var(--color-background);
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .user-form::placeholder {
+        /* Blanco opaco */
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .error {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .btn-close:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .card-body {
+        padding: 3rem;
+    }
+
+    @media (max-width: 768px) {
+
+        .title {
+            font-size: 2rem;
+        }
+
+        .btn-accounts {
+            font-size: 0.8rem;
+        }
+
+        .user-form {
+            font-size: 0.8rem;
+        }
+
+        .error {
+            font-size: 0.8rem;
+        }
+
+        #small-text {
+            font-size: 0.8rem;
+        }
+
+        #text-links {
+            font-size: 0.8rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+    }
 </style>
 
 <div id="particles-js"></div>

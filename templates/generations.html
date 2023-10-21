@@ -1,0 +1,952 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css">
+<script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
+
+<style>
+    .users {
+        font-size: 0.8rem;
+    }
+
+    .play-button {
+        height: 2.5rem;
+        /* Tamaño del botón */
+        width: 2.5rem;
+        /* Tamaño del botón */
+        background-color: transparent;
+        /* Color azul similar al de Spotify */
+        border: none;
+        /* Elimina el borde del botón */
+        cursor: pointer;
+        /* Cambia el cursor al pasar el mouse */
+        transition: color 0.3s ease-in-out;
+        /* Agrega una transición suave */
+        border-radius: 50%;
+        /* Hace que el botón sea redondo */
+        font-size: 1.5rem;
+        /* Aumenta el tamaño del icono */
+        padding: 0;
+        /* Elimina el relleno del botón */
+        outline: none;
+        /* Elimina el borde al hacer clic en el botón */
+        transform: scale(1);
+        /* Aumenta el tamaño del botón */
+    }
+
+    .play-button:hover {
+        transition: color 0.3s ease-in-out;
+        /* Agrega una transición suave */
+        transform: scale(1.1);
+        /* Aumenta el tamaño del botón */
+    }
+
+    #btnPrev,
+    #btnNext,
+    #btnPlay {
+        cursor: pointer;
+        /* Cambia el cursor al pasar el mouse */
+        border: none;
+        /* Elimina el borde del botón */
+        outline: none;
+        height: 38.4px;
+        width: 38.4px;
+        /* Elimina el borde al hacer clic en el botón */
+        transform: scale(1);
+        /* Aumenta el tamaño del botón */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+
+        /* Margen en el eje x */
+        margin: 0 0.5rem;
+
+        /* Color azul similar al de Spotify */
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    #btnPlay {
+        background-color: var(--color-background);
+    }
+
+    #btnPlay i {
+        color: var(--color-button-hover);
+    }
+
+    #btnPlay:hover {
+        transform: scale(1.1);
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    #btnPrev:hover,
+    #btnNext:hover {
+        transform: scale(1.1);
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .plyr {
+        --plyr-color-main: var(--color-control);
+        /* Cambia el color principal a verde Spotify */
+        --plyr-control-icon-size: 16px;
+        /* Aumenta el tamaño de los iconos */
+        --plyr-control-spacing: 1rem;
+        /* Reduce el espacio entre los controles */
+        --plyr-audio-controls-background: var(--color-control);
+        /* Cambia el color de fondo de los controles */
+        --plyr-audio-control-color: var(--color-background);
+        /* Cambia el color de los controles de audio */
+        --plyr-range-thumb-height: 12px;
+        /* Ajusta la altura del control deslizante */
+        --plyr-range-thumb-background: var(--color-background);
+        /* Cambia el color del control deslizante */
+        --plyr-range-thumb-active-shadow-width: 8px;
+        /* Elimina la sombra activa del control deslizante */
+        --plyr-range-track-height: 4px;
+        /* Reduce la altura de la barra de progreso */
+        --plyr-range-fill-background: var(--color-background);
+        /* Cambia el color de la barra de progreso */
+        --plyr-tooltip-background: var(--color-button-hover);
+        /* Cambia el color de fondo del tooltip */
+        --plyr-tooltip-color: var(--color-background);
+        /* Cambia el color del texto del tooltip */
+        --plyr-tooltip-padding: 8px;
+        /* Ajusta el relleno del tooltip */
+        --plyr-tooltip-arrow-size: 0;
+        /* Elimina la flecha del tooltip */
+        --plyr-tooltip-radius: 4px;
+        /* Ajusta el radio del tooltip */
+        --plyr-tooltip-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+        /* Elimina la sombra del tooltip */
+        --plyr-font-size-time: 0.75rem;
+        /* Tamaño de la fuente para el tiempo */
+        --plyr-font-weight-regular: 500;
+        /* Ajusta el grosor de la fuente regular */
+    }
+
+    /* Estilo personalizado para el botón de reproducción Plyr */
+    button.plyr__control[data-plyr="mute"] {
+        color: var(--color-background);
+        transform: scale(1);
+        /* Color verde similar al de Spotify */
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    /* Estilo al pasar el mouse sobre el botón de reproducción Plyr */
+    button.plyr__control[data-plyr="mute"]:hover {
+        transform: scale(1.1);
+        background-color: transparent;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .plyr__controls {
+        display: block;
+    }
+
+    .starss {
+        font-size: 0.8rem;
+    }
+
+    .audio-bar {
+        position: sticky;
+        z-index: 2;
+        bottom: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    .info-rating {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        left: 0;
+    }
+
+    .average-ratings {
+        font-size: 2rem;
+    }
+
+    /* Inicialmente, oculta el icono de reproducción */
+    .melody-playing {
+        display: none;
+        color: var(--color-button);
+    }
+
+    /* Inicialmente, muestra el número de melodía */
+    .melody-number {
+        display: block;
+        font-size: medium;
+        font-weight: bold;
+    }
+
+    /* Cuando se realiza hover en la fila de la tabla, muestra el icono de reproducción */
+    tr:hover .melody-number {
+        display: none;
+    }
+
+    tr:hover .melody-playing {
+        display: block;
+    }
+
+    /* Cuando la tabla está activa, muestra el icono de reproducción */
+    tr.table-active .melody-number {
+        display: none;
+    }
+
+    tr.table-active .melody-playing {
+        display: block;
+    }
+
+
+    /* Cunado la tabla es pequeña, oculta el número de melodía */
+
+    @media (max-width: 768px) {
+        .melody-number {
+            display: none;
+        }
+
+        .melody-playing {
+            display: block;
+        }
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        vertical-align: top;
+        --bs-table-bg: transparent;
+        --bs-table-active-bg: #88a7d040;
+        --bs-table-hover-bg: #88a7d018;
+    }
+
+    header.masthead-album .album {
+        color: var(--color-background);
+        margin-left: 2rem;
+    }
+
+    header.masthead-album {
+        padding-top: 3rem;
+        padding-bottom: 1rem;
+        background: no-repeat center center;
+
+        background-size: cover;
+        background-attachment: scroll;
+        /* Sombra abajo del header */
+
+    }
+
+    header.masthead-album .album .title-album {
+        font-size: 5rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+    }
+
+    header.masthead-album .album .text-album {
+        font-size: 1rem;
+        font-weight: 300;
+    }
+
+    .img {
+        width: 250px;
+        height: 250px;
+        /* Esto permite que la imagen conserve su proporción */
+        object-fit: cover;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+
+        transition: all 0.3s ease-in-out;
+    }
+
+    .krajee-icon.krajee-icon-star {
+        margin-right: 0.25rem;
+        margin-left: 0.25rem;
+    }
+
+    .theme-krajee-svg .empty-stars .krajee-icon-star {
+        background-image: url(/static/image/empty_star.svg);
+    }
+
+    .theme-krajee-svg .filled-stars .krajee-icon-star {
+        background-image: url(/static/image/filled_star.svg);
+    }
+
+    .header-table th {
+        font-size: medium;
+        color: var(--color-text);
+    }
+
+    .melody-number {
+        font-size: medium;
+        color: var(--color-text)
+    }
+
+    .melody-title {
+        font-size: medium;
+    }
+
+    .body-table td {
+        color: var(--color-text);
+    }
+
+    .option {
+        display: none;
+    }
+
+    .average-col {
+        display: block;
+    }
+
+    .average-row {
+        display: block;
+    }
+
+    .submit-rating{
+        display: none;
+    }
+
+    @media (max-width:768px) {
+
+        .theme-krajee-svg.rating-sm .krajee-icon {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+
+
+        .header-table {
+            font-size: small;
+        }
+
+        .melody-number {
+            font-size: small;
+        }
+
+        td.melody-title {
+            font-size: small;
+        }
+
+        .img {
+            width: 160px;
+            height: 160px;
+
+            transition: all 0.3s ease-in-out;
+        }
+
+        .average-ratings {
+            font-size: 1.6rem;
+        }
+
+        .starss {
+            font-size: 0.6rem;
+        }
+
+        .users {
+            font-size: 0.6rem;
+        }
+
+        header.masthead-album .album .title-album {
+            font-size: 3rem;
+            margin-bottom: 0;
+        }
+
+        header.masthead-album .album .text-album {
+            font-size: 0.875rem;
+        }
+
+        .volume,
+        .mute {
+            display: none;
+        }
+
+        .number-col {
+            display: none;
+        }
+
+        .option {
+            display: block;
+        }
+
+        .average-col {
+            display: none;
+        }
+
+        .average-row {
+            display: none;
+        }
+
+        .rate-col {
+            /* Centrar el texto */
+            text-align: center;
+        }
+
+        .rate-form {
+            /* Centrar el texto */
+            text-align: center;
+        }
+
+        .submit-rating{
+            display: block;
+        }
+
+    }
+</style>
+
+<header class="masthead-album">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-12 col-lg-11 col-xl-10">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-start align-items-center ">
+                            <a class="btn btn-primary " id="btn" href="/genetic">
+                                <i class="fa-solid fa-chevron-left"></i> Volver
+                            </a>
+                        </div>
+
+                        {% if user.is_superuser %}
+                        <div class="d-flex justify-content-start align-items-center">
+                            <!-- Si el usuario es administrador puede ver el formulario -->
+                            <form method="post" action="evolve/">
+                                {% csrf_token %}
+                                <!-- Otros campos del formulario -->
+                                <button type="submit" class="btn btn-primary mb-0">
+                                    Evolucionar <i class="fa-solid fa-chevron-right"></i></button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-start align-items-end">
+                        <img class="img img-fluid" src="{{ album.img.url }}"
+                            alt="Álbum {{ album.id }}" style="height: 100%;" />
+                        <div class="album w-100">
+                            <div class="title-album">Álbum {{ album.id }}</div>
+                            <span class="text-album mb-0">{{ melodies.0.generation }} Generación •
+                                {{ melodies.count }} Melodías, {{ album.duration }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container playlist px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-12 col-lg-11 col-xl-10">
+
+            <hr />
+            <!-- Encabezado de la tabla -->
+            <div class="table-responsive">
+                <table class="table table-hover table-borderless bg-trans">
+                    <thead>
+                        <tr class="header-table">
+                            <th class="text-center number-col" scope="col">#</th>
+                            <th class="option" scope="col"></th>
+                            <th scope="col">Título</th>
+                            <th class="rate-col" scope="col">Calificar</th>
+                            <th class="average-col" scope="col">Promedio</th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-top body-table">
+                        {% for melody in melodies %}
+                        <tr>
+
+                            <td class="align-middle text-center number-play">
+                                <button id="play-button-{{ melody.id }}" class="play-button"
+                                    data-src="{{ melody.mel.url }}" data-melody-id="{{ melody.id }}"
+                                    data-title="{{ melody.title  }}">
+                                    <div class="melody-number">
+                                        {{ forloop.counter }}
+                                        
+                                    </div>
+                                    <div class="melody-playing" id="melody-playing">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </button>
+                            </td>
+
+                            <td class="align-middle melody-title">
+                                <span class="">
+                                    {{ melody.title }}
+                                </span>
+                            </td>
+
+
+                            <td class="align-middle">
+                                <form style="width: min-content;" class="rate-form" data-melody-id="{{ melody.id }}"
+                                    data-user-has-rated="{% if melody.user_has_rated %}true{% else %}false{% endif %}">
+                                    {% csrf_token %}
+                                    <div class=" d-flex align-items-center justify-content-center"
+                                        style="width: min-content;">
+                                        <input id="rating-input-{{ melody.id }}" type="number" class="rating "
+                                            name="rating" data-min="0" data-max="5" data-step="1" data-size="sm"
+                                            data-show-clear="false" data-star-titles="false" data-show-caption="false"
+                                            {% if melody.user_has_rated %} data-display-only="true" {% endif %}>
+                                        <button type="button" class="btn btn-primary submit-rating ms-3"
+                                            style="visibility: hidden;">Enviar</button>
+                                    </div>
+                                </form>
+                            </td>
+
+                            <td class="align-middle average-row">
+                                <div class="info-rating">
+                                    <span class="average-ratings">
+                                        {{ melody.average_ratings }}
+                                    </span>
+                                    <div class="starss">
+                                        {% with average_rating=melody.average_ratings|floatformat:"0" %}
+                                        {% for i in "12345"|make_list %}
+                                        {% if i <= average_rating %} <i class="fa fa-star full"></i>
+                                            {% else %}
+                                            <i class="fa fa-star empty"></i>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endwith %}
+                                    </div>
+                                    <div class="py-1">
+                                        <div class="text-muted users">
+                                            <i class="fa-solid fa-users me-1"></i>
+                                            <span class="user_rating">
+                                                {{ melody.user_rating.all.count }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>
+
+<div class="audio-bar">
+    <audio id="audio-player" controls>
+        <!-- Deja este espacio en blanco por ahora -->
+    </audio>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+
+<script>
+    // Función para cargar las calificaciones del usuario al cargar la página
+    function loadUserRatings() {
+        const ratingInputs = document.querySelectorAll("input.rating");
+        const userRatings = JSON.parse('{{ user_ratings|safe }}');
+
+        ratingInputs.forEach(function (input) {
+            const melodyId = input.closest(".rate-form").getAttribute("data-melody-id");
+            if (userRatings && userRatings[melodyId]) { // Si el usuario ha calificado la melodía actual
+                input.value = userRatings[melodyId];
+                const submitButton = input.closest(".rate-form").querySelector(".submit-rating");
+                if (submitButton) {
+                    submitButton.style.display = "none";
+                }
+            }
+        });
+    }
+
+    // Función para actualizar las estrellas según el valor del promedio
+    function updateStars(selecter, averageRating) {
+        const starsHTML = [];
+
+        for (let i = 1; i <= 5; i++) {
+            if (i <= averageRating) {
+                starsHTML.push('<i class="fa fa-star full"></i>');
+            } else {
+                starsHTML.push('<i class="fa fa-star empty"></i>');
+            }
+        }
+        selecter.innerHTML = starsHTML.join(" ");
+    }
+
+    // Actualiza las calificaciones del usuario
+    function updateRatingValues(form, data) {
+        // Actualiza la calificación promedio en la lista
+        const row = form.closest("tr");
+        const averageRatingSpan = row.querySelector(".average-ratings");
+
+        // Actualiza el valor de calificación promedio
+        averageRatingSpan.textContent = parseFloat(data.average_rating).toFixed(1);
+
+        // Obtiene el selector de estrellas más cercano
+        const selecter = form.closest("tr").querySelector(".starss")
+
+        // Actualiza las estrellas
+        updateStars(selecter, Math.round(parseFloat(data.average_rating).toFixed(1)));
+
+        // Actualiza el número de usuarios que calificaron la melodía
+        const userRatingSpan = form.closest("tr").querySelector(".user_rating");
+        userRatingSpan.textContent = data.users_ratings_count;
+
+        // Actualiza el valor de user_has_rated
+        form.setAttribute("data-user-has-rated", "true");
+    }
+
+    // Deshabilita el input y el botón
+    function disableInputAndButton(input, form) {
+        // Desactiva el input y actualiza las opciones después de calificar
+        $(input).rating('refresh', {
+            disabled: true,
+            displayOnly: true,
+        });
+
+        // Oculta el botón de envío
+        const submitButton = form.querySelector(".submit-rating");
+        // Ocultar el botón de envío si no hay una estrella seleccionada
+        submitButton.style.visibility = "hidden";
+    }
+
+    // Función para enviar la calificación al servidor
+    function sendRating(melodyId, ratingValue, form, input) {
+        // Crea un objeto FormData para enviar los datos de calificación a la vista de Django
+        const formData = new FormData(form);
+        // Agrega el valor de calificación al objeto FormData
+        formData.append("ratings", ratingValue)
+
+        // Envía la calificación a la vista de Django
+        fetch(`evaluate/${melodyId}/`, {
+            method: "POST",
+            // Agrega el token CSRF en el encabezado de la solicitud para evitar el error 403 de CSRF 
+            headers: { "X-CSRFToken": "{{ csrf_token }}" },
+            // Agrega los datos de calificación al cuerpo de la solicitud
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+
+                    // Actualiza las calificaciones del usuario
+                    updateRatingValues(form, data);
+
+                    // Deshabilita el input y el botón
+                    disableInputAndButton(input, form);
+
+                } else {
+                    // Muestra un mensaje de error si la calificación falla
+                    alert("Ocurrió un error al evaluar la música: " + data.error_message);
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                alert("Ocurrió un error al evaluar la música.");
+            });
+    }
+
+    // Agrega este código JavaScript para manejar las calificaciones de forma asíncrona
+    document.addEventListener("DOMContentLoaded", function () {
+        // Carga las calificaciones del usuario
+        loadUserRatings();
+
+        // Selecciona los inputs de calificación
+        const ratingInputs = document.querySelectorAll("input.rating");
+        // Verifica si la pantalla es pequeña o no
+        isSmallScreen = window.matchMedia("(max-width: 768px)").matches;
+
+        // Agrega un evento de clic a cada input de calificación
+        ratingInputs.forEach(function (input) {
+
+            // Obtiene el formulario más cercano
+            const form = input.closest(".rate-form");
+            // Obtiene el id de la melodía
+            const melodyId = form.getAttribute("data-melody-id");
+
+            // Si la pantalla es pequeña, agrega un evento de clic al botón de envío
+            if (isSmallScreen) {
+
+                // Agrega un evento de clic al input de calificación
+                $(input).on('rating:change', function (event, value) {
+                    // Deshabilita el oyente de eventos para evitar múltiples envíos de solicitudes POST
+                    $(input).off('rating:change');
+                    const ratingValue = input.value || '0';
+                    if (ratingValue > 0) {
+                        // Muestra el botón de envío
+                        const submitButton = form.querySelector(".submit-rating");
+                        // Mostrar el botón de envío
+                        submitButton.style.visibility = "visible";
+
+                        submitButton.addEventListener('click', function () {
+                            const ratingValue = input.value || '0';
+                            // Deshabilita el botón de envío
+                            submitButton.disabled = true;
+                            // Envía la calificación al servidor
+                            sendRating(melodyId, ratingValue, form, input);
+                        });
+                    }
+                });
+            }
+            // Si la pantalla no es pequeña, agrega un evento de cambio al input de calificación
+            else {
+                // Agrega un evento de cambio al input de calificación
+                $(input).on('rating:change', function (event, value) {
+                    // Deshabilita el oyente de eventos para evitar múltiples envíos de solicitudes POST
+                    $(input).off('rating:change');
+                    const ratingValue = value || '0';
+                    // Envía la calificación al servidor
+                    sendRating(melodyId, ratingValue, form, input);
+                });
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const colorThief = new ColorThief();
+        const img = document.querySelector('.img');
+
+        // Make sure image is finished loading
+        if (img.complete) {
+            const dominantColor = colorThief.getColor(img);
+
+            console.log(dominantColor);
+
+            for (let i = 0; i < 3; i++) {
+                if (dominantColor[i] > 150) {
+                    dominantColor[i] = dominantColor[i] - 100;
+                }
+            }
+
+            const color1 = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+            const color2 = `rgb(87, 189, 158)`;
+
+            // Convierte el color RGB en formato CSS.
+            const backgroundColorAlbum = `linear-gradient(to top, ${color1} , ${color2}) `;
+
+            const header = document.querySelector('.masthead-album');
+            header.style.background = backgroundColorAlbum;
+
+            // Agrega la sombra con un color específico
+            const shadowColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]},0.5)`;
+            header.style.boxShadow = `0 1.5rem 2rem ${shadowColor}`;
+        }
+    });
+
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const controls = `
+        <div class="plyr__controls py-2">
+
+            <div class="d-flex align-items-center">
+
+                <div class="col-3 col-md-2">
+                    <div class="d-flex justify-content-start align-items-center">
+                        <div class="mel ">
+                            <!-- Contenido de la melodía -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-8">
+                    <div class="d-flex justify-content-center align-items-center my-1">
+                        <div id="btnPrev" class="">
+                            <i class="fas fa-step-backward"></i>
+                        </div>
+                        <div id="btnPlay" class="">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div id="btnNext" class=" ">
+                            <i class="fas fa-step-forward"></i>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="plyr__time plyr__time--current mx-4" aria-label="Current time">00:00</div>
+                        <div class="plyr__progress w-100">
+                            <input data-plyr="seek" type="range" min="0" max="100" step="0.01" value="0" aria-label="Seek">
+                            <progress class="plyr__progress__buffer" min="0" max="100" value="0">% buffered</progress>
+                            <span role="tooltip" class="plyr__tooltip">00:00</span>
+                        </div>
+                        <div class="plyr__time plyr__time--duration mx-4" aria-label="Duration">00:00</div>
+                    </div>
+                </div>
+
+                <div class="col-3 col-md-2">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <button type="button" class="plyr__control" aria-label="Mute" data-plyr="mute">
+                            <svg class="icon--pressed" role="presentation"><use xlink:href="#plyr-muted"></use></svg>
+                            <svg class="icon--not-pressed" role="presentation"><use xlink:href="#plyr-volume"></use></svg>
+                            <span class="label--pressed plyr__tooltip" role="tooltip">Desactivar silenciar</span>
+                            <span class="label--not-pressed plyr__tooltip" role="tooltip">Silenciar</span>
+                        </button>
+
+                        <div class="plyr__volume ">
+                            <input data-plyr="volume" type="range" min="0" max="1" step="0.05" value="1" autocomplete="off" aria-label="Volume">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        `;
+        // Setup the player
+        const player = new Plyr('#audio-player', { controls });
+
+        const audioPlayer = player.media;
+        const playButtons = document.querySelectorAll('.play-button');
+        // Muestra el titulo de la melodía
+        document.querySelector('.mel').innerHTML = playButtons[0].getAttribute('data-title');
+
+        document.getElementById('btnPlay').addEventListener('click', function () {
+            // Si la melodía existe, reproduce o pausa la melodía
+            if (audioPlayer.src) {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                } else {
+                    audioPlayer.pause();
+                }
+            } else {
+                // Si no hay melodía, reproduce la primera melodía
+                playMelodyAtIndex(0);
+            }
+        });
+
+        let currentMelodyIndex = 0; // Declaración de la variable en el ámbito global
+
+        // Función para reproducir la melodía en el índice especificado
+        function playMelodyAtIndex(index) {
+            if (index >= 0 && index < playButtons.length) {
+                playButtons[index].click(); // Simula el clic en el botón de reproducción
+            }
+        }
+
+        // Maneja el clic en el botón "prev"
+        document.getElementById('btnPrev').addEventListener('click', function () {
+            currentMelodyIndex = (currentMelodyIndex - 1 + playButtons.length) % playButtons.length;
+            playMelodyAtIndex(currentMelodyIndex);
+        });
+
+        // Maneja el clic en el botón "next"
+        document.getElementById('btnNext').addEventListener('click', function () {
+            currentMelodyIndex = (currentMelodyIndex + 1) % playButtons.length;
+            playMelodyAtIndex(currentMelodyIndex);
+        });
+
+
+        // Variable para rastrear la melodía actual y su estado
+        let currentMelodyId = null;
+        let currentMelodyState = 'paused';
+
+        playButtons.forEach(function (button) {
+            const audioSrc = button.getAttribute('data-src');
+            const melodyId = button.getAttribute('data-melody-id');
+            const melodyTitle = button.getAttribute('data-title');
+
+            button.addEventListener('click', function () {
+                document.querySelector('.mel').innerHTML = melodyTitle;
+
+                // Obtiene la fila correspondiente al botón
+                const row = button.closest('tr');
+
+                if (melodyId === currentMelodyId) {
+                    // Si se hace clic en el botón de la melodía actual
+                    if (currentMelodyState === 'paused') {
+                        // Si la melodía actual está pausada, reanúdala
+                        audioPlayer.play();
+                        currentMelodyState = 'playing';
+
+                        row.classList.add('table-active');
+
+                        const icon = button.querySelector('.melody-playing');
+                        icon.innerHTML = '<i class="fas fa-pause"></i>';
+                        document.getElementById('btnPlay').innerHTML = '<i class="fas fa-pause"></i>';
+
+                    } else {
+                        // Si la melodía actual se está reproduciendo, páusela
+                        audioPlayer.pause();
+                        currentMelodyState = 'paused';
+
+                        // Quita la clase de fila seleccionada
+                        row.classList.remove('table-active');
+
+                        const icon = button.querySelector('.melody-playing');
+                        icon.innerHTML = '<i class="fas fa-play"></i>';
+                        document.getElementById('btnPlay').innerHTML = '<i class="fas fa-play"></i>';
+
+                    }
+                } else {
+                    // Si se hace clic en una nueva melodía
+                    currentMelodyId = melodyId;
+                    currentMelodyState = 'playing';
+
+                    // Pausa todas las demás melodías y quita la clase de fila seleccionada de otras filas
+                    playButtons.forEach(function (otherButton) {
+                        if (otherButton !== button) {
+                            const otherRow = otherButton.closest('tr');
+                            otherRow.classList.remove('table-active');
+                            const icon = otherButton.querySelector('.melody-playing');
+                            icon.innerHTML = '<i class="fas fa-play"></i>';
+                            document.getElementById('btnPlay').innerHTML = '<i class="fas fa-pause"></i>';
+
+                        }
+                    });
+
+                    // Inicia la reproducción de la nueva melodía y muestra el icono de pausa
+                    audioPlayer.src = audioSrc;
+                    audioPlayer.play();
+                    row.classList.add('table-active');
+                    const icon = button.querySelector('.melody-playing');
+                    icon.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+            });
+        });
+
+        // Modifica el código para manejar el clic en el botón "Play" personalizado
+        audioPlayer.addEventListener('play', function () {
+            currentMelodyState = 'playing';
+            const currentPlayButton = document.querySelector(`[data-melody-id="${currentMelodyId}"]`);
+            const icon = currentPlayButton.querySelector('.melody-playing');
+            icon.innerHTML = '<i class="fas fa-pause"></i>';
+            document.getElementById('btnPlay').innerHTML = '<i class="fas fa-pause"></i>';
+
+        });
+
+        // Modifica el código para manejar el clic en el botón "Pause" personalizado
+
+        audioPlayer.addEventListener('pause', function () {
+            currentMelodyState = 'paused';
+            const currentPlayButton = document.querySelector(`[data-melody-id="${currentMelodyId}"]`);
+            const icon = currentPlayButton.querySelector('.melody-playing');
+            icon.innerHTML = '<i class="fas fa-play"></i>';
+            document.getElementById('btnPlay').innerHTML = '<i class="fas fa-play"></i>';
+
+        });
+
+        // Agrega un evento para cambiar el botón al icono "play" cuando la canción finaliza
+        audioPlayer.addEventListener('ended', function () {
+            playButtons.forEach(function (button) {
+                const icon = button.querySelector('.melody-playing');
+                icon.innerHTML = '<i class="fas fa-play"></i>';
+                const row = button.closest('tr');
+                row.classList.remove('table-active');
+            });
+
+            // Encuentra el botón de reproducción de la melodía actual
+            const currentPlayButton = document.querySelector(`[data-melody-id="${currentMelodyId}"]`);
+
+            // Encuentra el siguiente botón de reproducción
+            const nextPlayButton = currentPlayButton.closest('tr').nextElementSibling.querySelector('.play-button');
+
+            if (nextPlayButton) {
+                // Si hay una siguiente melodía, reproduce automáticamente
+                nextPlayButton.click();
+            } else {
+                // Si no hay siguiente melodía, detén la reproducción
+                audioPlayer.pause();
+                currentMelodyState = 'paused';
+            }
+        });
+    });
+
+</script>
+
+{% endblock %}

@@ -10,7 +10,7 @@ from django.http import JsonResponse
 
 def signup(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('index')
     else:
         if request.method == 'GET':
             return render(request, 'signup.html', {'form': UserCreationForm()})
@@ -31,13 +31,13 @@ def signup(request):
                     username=username, password=password1)
                 user.save()
                 login(request, user)
-                return redirect('home')
+                return redirect('index')
 
 
 def signin(request):
     # Si el usuario no está autenticado, mostrar la página de inicio de sesión
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('index')
     else:
         if request.method == 'GET':
             return render(request, 'signin.html', {
@@ -54,7 +54,7 @@ def signin(request):
                 })
             else:
                 login(request, user)
-                return redirect('home')
+                return redirect('index')
 
 
 def check_username_availability(request):

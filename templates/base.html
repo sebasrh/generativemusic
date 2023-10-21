@@ -237,6 +237,11 @@
             margin-top: 21px;
         }
 
+        .dropdown .dropdown-menu .dropdown-item:active {
+            background: var(--color-background);
+            color: var(--color-navigation-bar);
+        }
+
         .dropdown .dropdown-item p {
             color: var(--color-text);
             transition: all 0.3s ease;
@@ -283,7 +288,6 @@
             }
 
         }
-
 
         .navbar-brand {
             color: var(--color-background);
@@ -415,6 +419,7 @@
 
 <body>
     <div class="main-container">
+        {% if user.is_authenticated %}
         <div class="sidebar shadow-lg" id="side_nav">
             <div class="header-box px-3 pt-3 pb-3">
                 <div class=" d-flex justify-content-between">
@@ -434,8 +439,8 @@
                     <span class="link_name">Home</span>
                     </a>
                 </li>
-                <li class="{% if request.path == '/ga/' %}active{% endif %}"">
-                    <a href=" /ga" class="text-decoration-none px-3 py-2 d-block">
+                <li class="{% if request.path == '/genetic/' %}active{% endif %}"">
+                    <a href=" /genetic" class="text-decoration-none px-3 py-2 d-block">
                     <i class="fas fa-ranking-star me-2"></i>
                     <span class="link_name">Calificar</span>
                     </a>
@@ -458,7 +463,7 @@
                         <span class="dropdown-toggle mb-0" id="profileDropdown" role="button" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user me-2"></i>
-                            user.username </span>
+                            {{user.username}} </span>
                         <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
                             <a class="dropdown-item" href="/accounts/logout">
                                 <p class="mb-0 text-center">Cerrar Sesión</p>
@@ -468,10 +473,9 @@
                 </div>
             </nav>
         </div>
-
-        <div class="content">
-            {% block content %}
-            {% endblock %}
+        {% endif %}
+        <div {% if user.is_authenticated %} class="content" {% else %} class="auth-content" {% endif %}>
+            {% block content %}{% endblock %}
         </div>
     </div>
 
@@ -523,7 +527,6 @@
 
         });
     </script>
-
 
 </body>
 

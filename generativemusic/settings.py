@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'genetic',
-    'accounts'
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +124,9 @@ LOGIN_URL = "/accounts/signin"
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -134,8 +137,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_TMP = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+MEDIA_TMP = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
 os.makedirs(STATIC_TMP, exist_ok=True)
 os.makedirs(STATIC_ROOT, exist_ok=True)
+
+os.makedirs(MEDIA_TMP, exist_ok=True)
+os.makedirs(MEDIA_ROOT, exist_ok=True)
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
