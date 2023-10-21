@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- default styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all"
+        rel="stylesheet" type="text/css" />
+
+    <!-- with v4.1.0 Krajee SVG theme is used as default (and must be loaded as below) - include any of the other theme CSS files as mentioned below (and change the theme property of the plugin) -->
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css"
+        media=" all" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* base */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        :root {
+            --color-background: #fff;
+            /* Fondo de la página */
+            --color-button: #88A7D0;
+            /* Color de botón */
+            --color-button-hover: #789DCA;
+            /* Color de botón al pasar el cursor */
+            --color-navigation-bar: #57BD9E;
+            /* Color de la barra de navegación */
+            --color-secondary-heading: #2CA880;
+            /* Color de títulos secundarios */
+            --color-primary-heading: #009D71;
+            /* Color de títulos principales */
+            --color-text: #333;
+            /* Color de texto */
+            --color-card: #FBFAFB;
+            /* Color de tarjetas */
+            --color-card-border: #E2E2E2;
+            --color-control: #789DCA;
+            /* Color de los controles */
+        }
+
+
+        * {
+            padding: 0%;
+            margin: 0%;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            user-select: none;
+            background: var(--color-background);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--color-primary-heading);
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--color-secondary-heading);
+        }
+
+        p,
+        ul {
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+
+        li {
+            font-size: 0.875rem;
+            color: var(--color-text);
+        }
+
+        .btn-primary {
+            --bs-btn-bg: var(--color-button);
+            /* Color de botón */
+            --bs-btn-border-color: var(--color-button-hover);
+            /* Color de borde de botón */
+            --bs-btn-hover-bg: var(--color-button-hover);
+            /* Color de botón al pasar el cursor */
+            --bs-btn-hover-border-color: var(--color-button-hover);
+            /* Color de borde de botón al pasar el cursor */
+            --bs-btn-disabled-color: var(--color-text);
+            /* Color de texto de botón deshabilitado */
+            --bs-btn-disabled-bg: var(--color-button);
+            /* Color de botón deshabilitado */
+            --bs-btn-disabled-border-color: var(--color-button);
+            /* Color de borde de botón deshabilitado */
+            --bs-btn-focus-bg: var(--color-button-hover);
+            /* Color de botón al enfocar */
+            --bs-btn-focus-border-color: var(--color-button-hover);
+            /* Color de borde de botón al enfocar */
+            --bs-btn-active-bg: var(--color-button-hover);
+            /* Color de botón al hacer click */
+            --bs-btn-active-border-color: var(--color-button-hover);
+            /* Color de borde de botón al hacer click */
+            --bs-btn-font-size: 0.875rem;
+            /* Tamaño de texto de botón */
+            --bs-btn-font-weight: 800;
+            /* Grosor de texto de botón */
+            --bs-btn-padding-x: 1rem;
+            /* Padding horizontal de botón */
+            --bs-btn-padding-y: 0.5rem;
+            /* Padding vertical de botón */
+            --bs-btn-border-radius: 5px;
+            /* Radio de borde de botón */
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            transition: transform 0.2s ease-in-out;
+            transform: scale(1.05);
+        }
+
+        @media (min-width: 767px) {
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            h3 {
+                font-size: 2rem;
+            }
+
+            p,
+            ul {
+                font-size: 1.2rem;
+            }
+
+            li {
+                font-size: 1.2rem;
+            }
+
+            .btn-primary {
+                font-size: 1.2rem;
+
+            }
+        }
+
+        #side_nav {
+            background: var(--color-navigation-bar);
+            width: 250px;
+            min-height: 100vh;
+            transition: all 0.3s;
+            z-index: 99;
+            position: fixed;
+            margin-left: -250px;
+            border: none;
+            color: var(--color-background);
+        }
+
+        .navbar-container {
+            background: var(--color-navigation-bar);
+            position: fixed;
+            z-index: 4;
+            width: 100%;
+            top: 0;
+            color: var(--color-background);
+        }
+
+        .open-btn,
+        .close-btn {
+            color: var(--color-background);
+        }
+
+        .navbar {
+            height: 70px;
+        }
+
+        .content {
+            width: 100%;
+            position: relative;
+            left: 0;
+            transition: all 0.3s ease-in-out;
+            padding-top: 70px;
+        }
+
+        #side_nav.active {
+            margin-left: 0;
+        }
+
+        #side_nav.active~.content {
+            left: 249px;
+            width: calc(100% - 250px);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .sidebar li.active {
+            background: var(--color-background);
+            border-radius: 8px;
+        }
+
+        .sidebar li.active a {
+            color: var(--color-navigation-bar)
+        }
+
+        .sidebar li a {
+            color: var(--color-background);
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .sidebar li a:hover {
+            background: var(--color-background);
+            border-radius: 8px;
+            color: var(--color-navigation-bar);
+            transition: all 0.5s ease;
+        }
+
+        .list-unstyled {
+            margin-top: 2rem;
+        }
+
+        .list-unstyled li {
+            margin-bottom: 0.5rem;
+        }
+
+        .dropdown .dropdown-menu {
+            background: var(--color-background);
+            border: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            margin-top: 21px;
+        }
+
+        .dropdown .dropdown-item p {
+            color: var(--color-text);
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+
+        }
+
+        .dropdown .dropdown-item p:hover {
+            color: var(--color-background);
+            background: var(--color-navigation-bar);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar li a {
+                font-size: 0.875rem;
+            }
+        }
+
+        @media(max-width: 992px) {
+            #side_nav {
+                margin-left: -250px;
+                position: absolute;
+                min-height: 100vh;
+                z-index: 99;
+                position: fixed;
+            }
+
+            #side_nav.active {
+                margin-left: 0;
+            }
+
+            #side_nav.active~.content {
+                left: 0;
+                width: 100%;
+            }
+
+            .dropdown .dropdown-menu {
+                margin-top: 23px;
+            }
+
+            .dropdown .dropdown-item p {
+                padding: 0.3rem 0.7rem;
+            }
+
+        }
+
+
+        .navbar-brand {
+            color: var(--color-background);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--color-button-hover);
+            font-size: 1.5rem;
+            font-weight: 700;
+            background-color: var(--color-button);
+            transform: scale(1.0);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            background-color: var(--color-button-hover);
+            color: var(--color-background);
+        }
+
+        .logo-text {
+            color: var(--color-background);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            background-color: var(--color-background);
+            color: var(--color-navigation-bar);
+            border-radius: 50%;
+            min-width: 40px;
+            min-height: 40px;
+            max-width: 40px;
+            max-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background-color: var(--color-background);
+            color: var(--color-navigation-bar);
+        }
+
+
+        .open-btn {
+            background-color: var(--color-background);
+            color: var(--color-navigation-bar);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .open-btn:hover {
+            background-color: var(--color-background);
+            color: var(--color-navigation-bar);
+        }
+
+        .dropdown-toggle {
+            color: var(--color-background);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .dropdown-toggle:hover {
+            color: var(--color-background);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Transparente con un fondo oscuro */
+            display: none;
+            /* Inicialmente oculto */
+            z-index: 98;
+            /* Debe ser inferior al z-index del sidebar (99) */
+        }
+
+        .overlay.active {
+            display: block;
+            /* Mostrar la capa cuando esté activa */
+        }
+
+        /*si la pantalla es menor a 992px, overlay background es gris oscuro*/
+        @media (max-width: 992px) {
+            .overlay {
+                background: rgba(0, 0, 0, 0.2);
+            }
+
+            .dropdown-toggle {
+                font-size: 1rem;
+            }
+
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .close-btn {
+                min-width: 30px;
+                min-height: 30px;
+                max-width: 30px;
+                max-height: 30px;
+            }
+
+            .open-btn {
+                width: 30px;
+                height: 30px;
+            }
+
+            .logo:hover {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+
+    <title>Música Generativa</title>
+
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="sidebar shadow-lg" id="side_nav">
+            <div class="header-box px-3 pt-3 pb-3">
+                <div class=" d-flex justify-content-between">
+                    <span class="logo-text me-3">
+                        Música Generativa
+                    </span>
+
+                    <button class="btn close-btn border-0">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <ul class="list-unstyled px-3 py-1">
+                <li class="{% if request.path == '/' %}active{% endif %}"">
+                    <a href=" /" class="text-decoration-none px-3 py-2 d-block">
+                    <i class="fas fa-home me-2"></i>
+                    <span class="link_name">Home</span>
+                    </a>
+                </li>
+                <li class="{% if request.path == '/ga/' %}active{% endif %}"">
+                    <a href=" /ga" class="text-decoration-none px-3 py-2 d-block">
+                    <i class="fas fa-ranking-star me-2"></i>
+                    <span class="link_name">Calificar</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="overlay"></div>
+        <div class="navbar-container">
+            <nav class="navbar navbar-expand-md">
+                <div class="container-fluid px-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button class="btn open-btn me-5 border-0 ">
+                            <i class="fas fa-stream"></i>
+                        </button>
+                        <a class="navbar-brand" href="/">
+                            MG
+                        </a>
+                    </div>
+                    <div class="dropdown">
+                        <span class="dropdown-toggle mb-0" id="profileDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i>
+                            user.username </span>
+                        <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="/accounts/logout">
+                                <p class="mb-0 text-center">Cerrar Sesión</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- default scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+        crossorigin="anonymous"></script>
+
+    <!-- important mandatory libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js"
+        type="text/javascript"></script>
+
+    <!-- with v4.1.0 Krajee SVG theme is used as default (and must be loaded as below) - include any of the other theme JS files as mentioned below (and change the theme property of the plugin) -->
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.js"></script>
+
+    <!-- optionally if you need translation for your language then include locale file as mentioned below (replace LANG.js with your own locale file) -->
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/locales/LANG.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Abre el sidebar al hacer clic en el botón
+            $('.open-btn').on('click', function () {
+                $('.sidebar').addClass('active');
+                // Muestra la capa protectora solo si la pantalla es menor a 992px
+                if (window.innerWidth <= 992) {
+                    $('.overlay').addClass('active');
+                }
+            });
+
+            // Cierra el sidebar al hacer clic en el botón de cierre
+            $('.close-btn').on('click', function () {
+                $('.sidebar').removeClass('active');
+                // Oculta la capa protectora solo si la pantalla es menor a 992px
+                if (window.innerWidth <= 992) {
+                    $('.overlay').removeClass('active');
+                }
+            });
+
+            // Cierra el sidebar si la pantalla es menor a 992px y se hace clic en la capa protectora
+            $('.overlay').on('click', function () {
+                $('.sidebar').removeClass('active');
+                $('.overlay').removeClass('active');
+            });
+
+        });
+    </script>
+
+
+</body>
+
+</html>

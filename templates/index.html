@@ -1,0 +1,511 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    
+
+    /* Home */
+    header.masthead .site-heading {
+        color: var(--color-background);
+    }
+
+    header.masthead .site-heading {
+        text-align: center;
+    }
+
+    header.masthead {
+        position: relative;
+        margin-bottom: 3rem;
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+        background: no-repeat center center;
+        background-color: var(--color-button);
+        background-size: cover;
+        background-attachment: scroll;
+    }
+
+    header.masthead:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #000000;
+        opacity: 0.5;
+    }
+
+    header.masthead .site-heading h1,
+    header.masthead .site-heading .h1 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin-bottom: 2rem;
+    }
+
+    header.masthead .site-heading .subheading {
+        font-size: 1rem;
+        font-weight: 300;
+        line-height: 1.1;
+        display: block;
+        margin: 0.75rem 0 2rem;
+    }
+
+    i.rating {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    hr {
+        border: 0;
+        opacity: 1;
+        margin: 1.5rem 0;
+    }
+
+    footer {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        background-color: transparent;
+        color: var(--color-text);
+        text-align: center;
+        font-size: 0.75rem;
+    }
+
+    .thanks {
+        font-size: 0.75rem;
+        margin-bottom: 2rem;
+    }
+
+    .list-group-item {
+        background-color: transparent;
+        border: none;
+        padding: 1rem 1rem;
+        color: var(--color-text);
+    }
+
+    .ml {
+        margin-left: 3rem;
+    }
+
+    .full {
+        color: #fde16d;
+        font-size: 0.75rem;
+    }
+
+    .empty {
+        color: var(--color-text);
+        font-size: 0.75rem;
+    }
+
+    .mb-btn {
+        margin-bottom: 3rem;
+    }
+
+    .bg-stars {
+        padding-left: 0.875rem !important;
+        padding-right: 0.875rem !important;
+        padding-top: 0.3rem !important;
+        padding-bottom: 0.3rem !important;
+        background-color: var(--color-card);
+        border-radius: 0.5rem !important;
+        box-shadow: 0 0 0 0.1rem var(--color-card-border);
+        width: min-content;
+    }
+
+    ul li.list-inline-item {
+        font-size: 0.68rem;
+        transition: all 0.3s ease;
+    }
+
+    @media (min-width: 767px) {
+
+        header.masthead {
+            padding-top: 12.5rem;
+            padding-bottom: 12.5rem;
+        }
+
+        header.masthead .site-heading h1,
+        header.masthead .site-heading .h1 {
+            font-size: 4.875rem;
+        }
+
+        header.masthead .subheading {
+            font-size: 1.875rem;
+        }
+
+        header.masthead .site-heading .subheading {
+            font-size: 1.4rem;
+        }
+
+        .thanks {
+            font-size: 1rem;
+        }
+
+        .small {
+            font-size: 0.875rem;
+        }
+
+
+        i.rating {
+            font-size: 3rem;
+        }
+
+        .bg-stars {
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+        }
+
+        .full {
+            font-size: 1rem;
+        }
+
+        .empty {
+            font-size: 1rem;
+        }
+
+        ul li.list-inline-item {
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+    }
+
+
+    /* Estilo para los sliders */
+    .text-links {
+        text-decoration: none;
+        color: var(--color-primary-heading);
+    }
+
+    .text-links:hover {
+        text-decoration-line: underline;
+    }
+
+    /* Estilo para el contenedor del slider */
+    .slider-container {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        margin: auto;
+        position: relative;
+    }
+
+    /* Estilo para la lista de diapositivas */
+    .slider-container .slider-list {
+        display: flex;
+        animation: scroll 40s linear infinite;
+        width: calc(220px * 10);
+    }
+
+    /* Estilo para cada elemento de diapositiva */
+    .slider-container .slider-item {
+        width: 220px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin: 10px;
+    }
+
+    /* Estilo para el texto de cada elemento de diapositiva */
+    .slider-container .slider-item p {
+        font-weight: 600;
+        color: var(--color-secondary-heading);
+    }
+
+    .slider-fade-start {
+        width: 20vh;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: linear-gradient(to left, transparent, var(--color-background));
+        z-index: 1;
+    }
+
+    .slider-fade-end {
+        width: 20vh;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: linear-gradient(to right, transparent, var(--color-background));
+        z-index: 2;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(calc(-220px * 5));
+        }
+    }
+
+
+    @media (max-width: 768px) {
+        .slider-fade-start {
+            width: 10vh;
+        }
+
+        .slider-fade-end {
+            width: 10vh;
+        }
+
+        .slider-container .slider-list {
+            width: calc(140px * 10);
+        }
+
+        .slider-container .slider-item {
+            width: 140px;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-140px * 5));
+            }
+        }
+    }
+</style>
+
+
+<!-- Masthead -->
+<header class="masthead" style="background-image: url('/static/image/bg-2.png')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>Trabajo de Grado</h1>
+                    <span class="subheading mb-0">Análisis Comparativo de dos técnicas de música generativa para
+                        videojuegos
+                        independientes del género RPG</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-12 col-lg-10 col-xl-9">
+
+
+            <!-- Post preview -->
+            <div>
+                <h2 class="mt-0">Resumen</h2>
+                <p>
+                    El propósito de este proyecto es comparar dos técnicas de música generativa con el fin de determinar
+                    cuál de ellas es la más adecuada para la composición de música de videojuegos independientes del
+                    género RPG.
+                </p>
+            </div>
+            <!-- Divider -->
+            <hr />
+            <!-- Post preview -->
+            <div>
+                <h2>Investigación</h2>
+                <p class="mb-2">
+                    Tras realizar la investigación pertinente, se determinó que las técnicas que mejor se adaptan a los
+                    objetivos de este proyecto son:
+                </p>
+                <ul class="mb-2 list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <strong>•</strong>
+                        <div class="ms-2 me-auto">
+                            Algoritmos Genéticos (AG).
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <strong>•</strong>
+                        <div class="ms-2 me-auto">
+                            Redes Neuronales Recurrentes (RNR).
+                        </div>
+                    </li>
+                </ul>
+                <p>
+                    Se comenzó con la implementación de los <strong>AG</strong> debido a la necesidad de involucrar a
+                    humanos en la
+                    evaluación de la calidad de la música generada, un proceso que puede resultar bastante demorado. Por
+                    otro lado, las <strong>RNR</strong> se implementarán en un futuro para comparar los resultados de
+                    ambas técnicas.
+                </p>
+            </div>
+            <!-- Divider -->
+            <hr />
+            <!-- Post preview -->
+            <div>
+                <h2>Algoritmos Genéticos</h2>
+                <p>
+                    Resumiendo, son una técnica de optimización basada en la teoría de la evolución de Darwin. En el
+                    caso de la música, se utiliza para generar piezas musicales que se adapten a ciertos criterios de
+                    calidad, como por ejemplo, que sean agradables al oído humano.
+                </p>
+                <h3>Funcionamiento</h3>
+                <p>
+                    El funcionamiento básico de un <strong>AG</strong> es el siguiente:
+                </p>
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-3 me-auto">
+                            Generar una población inicial aleatoria de individuos (piezas musicales).
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-3 me-auto">
+                            Calcular aptitud de cada individuo (evaluar la calidad de la pieza musical).
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-3 me-auto">
+                            Seleccionar (probabilísticamente) en base a su aptitud a los individuos que pasarán a la
+                            siguiente generación.
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-3 me-auto">
+                            Aplicar operadores genéticos (cruza y mutación) para generar nuevos individuos.
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-3 me-auto">
+                            Repetir desde el paso 2 hasta que se cumpla un criterio de parada (número de generaciones).
+                        </div>
+                    </li>
+                </ol>
+
+            </div>
+            <!-- Divider -->
+            <hr />
+            <!-- Post preview -->
+            <div>
+                <h2>Necesito tu ayuda</h2>
+                <p>
+                    Para evaluar la calidad de las piezas musicales generadas, necesito que me ayudes a calificarlas.
+                    Para ello, se ha implementado un sistema de valoración por estrellas.
+                </p>
+                <div class="slider-container">
+                    <div class="slider-fade-start"></div>
+                    <div class="slider-fade-end"></div>
+                    <div class="slider-list" id="slider-list">
+
+                        <div class="slider-item">
+                            <div class="my-3">
+                                <p class="mb-0">Muy Mala</p>
+                                <i class="fa-solid fa-face-dizzy rating" style="color: #FF4E3A;"></i>
+                                <div class="d-flex bg-stars">
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star empty"></i>
+                                    <i class="fa fa-star empty"></i>
+                                    <i class="fa fa-star empty"></i>
+                                    <i class="fa fa-star empty"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-item">
+                            <div class="my-3">
+                                <p class="mb-0">Mala</p>
+                                <div><i class="fa-solid fa-face-frown rating" style="color: #FE903B;"></i></div>
+                                <div class="d-flex bg-stars">
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star empty"></i>
+                                    <i class="fa fa-star empty"></i>
+                                    <i class="fa fa-star empty"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-item">
+                            <div class="my-3">
+                                <p class="mb-0">Regular</p>
+                                <div><i class="fa-solid fa-face-meh rating" style="color: #FFDE49;"></i></div>
+                                <div class="d-flex bg-stars">
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star empty"></i>
+                                    <i class="fa fa-star empty"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-item">
+                            <div class="my-3">
+                                <p class="mb-0">Buena</p>
+                                <div><i class="fa-solid fa-face-smile rating" style="color: #AEF557;"></i></div>
+                                <div class="d-flex bg-stars">
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star empty"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-item">
+                            <div class="my-3">
+                                <p class="mb-0">Muy Buena</p>
+                                <div><i class="fa-solid fa-face-laugh rating" style="color: #25BA18; "></i></div>
+                                <div class="d-flex bg-stars">
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                    <i class="fa fa-star full"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Divider -->
+            <hr />
+            <div class="d-flex justify-content-end align-items-center">
+                <a class="btn btn-primary " id="btn" href="/ga">
+                    Ir a Calificar <i class="fa-solid fa-chevron-right"></i>
+                </a>
+            </div>
+            <!-- Divider -->
+            <hr />
+            <!-- Post preview -->
+            <h2>Agradecimiento</h2>
+            <p>
+                Agradezco sinceramente su interés y contribución a este proyecto.
+            </p>
+            <p>
+                ¡Gracias!🙏
+            </p>
+        </div>
+    </div>
+</div>
+<hr />
+<!-- Footer -->
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7 text-center">
+                <div class="">&copy; 2023, hecho con <i class="fa-solid fa-heart" style="color: #FF4E3A;"></i> por
+                    <a href="mailto:sebastian.hidalgo@correounivalle.edu.co" class="text-links" target="_blank">
+                        Sebastian Rengifo Hidalgo.
+                    </a>
+                </div>
+            </div>
+        </div>
+</footer>
+<script>
+    const sliderList = document.getElementById('slider-list');
+    const allSlideItems = sliderList.querySelectorAll('.slider-item');
+
+    // Clonar todos los elementos de diapositiva
+    for (let i = 0; i < allSlideItems.length; i++) {
+        sliderList.appendChild(allSlideItems[i].cloneNode(true));
+    }
+</script>
+
+{% endblock %}
