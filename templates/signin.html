@@ -1,0 +1,344 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    #particles-js {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-image: url("/static/image/bg.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+        /* oscurecer la imagen */
+        background-blend-mode: multiply;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .transparent-card {
+        background: transparent;
+        backdrop-filter: blur(3px);
+        border: 2px solid var(--color-background);
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .title {
+        color: var(--color-background);
+        font-weight: 800;
+        margin-bottom: 2rem;
+    }
+
+    .btn-accounts {
+        background-color: var(--color-background);
+        border: none;
+        color: #202637;
+        font-weight: 800;
+        padding: 0.8rem 1rem;
+        border-radius: 40px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .btn-accounts:hover {
+        background-color: var(--color-background);
+        border: none;
+        border-radius: 40px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .btn-accounts:focus {
+        background-color: var(--color-background);
+        border: none;
+        border-radius: 40px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .form-control.is-invalid,
+    .was-validated .form-control:invalid {
+        border: 2px solid rgb(244, 67, 54);
+        box-shadow: 0 0 0 0.25rem rgb(244, 67, 54, 0.25);
+        background-image: none;
+    }
+
+    .form-control.is-valid,
+    .was-validated .form-control:valid {
+        border: 2px solid rgb(113, 178, 103);
+        box-shadow: 0 0 0 0.25rem rgb(113, 178, 103, 0.25);
+        background-image: none;
+    }
+
+    /* hover */
+    .form-control.is-valid:hover,
+    .was-validated .form-control:valid:hover {
+        border: 2px solid rgb(113, 178, 103);
+        box-shadow: 0 0 0 0.25rem rgb(113, 178, 103, 0.25);
+        background-image: none;
+    }
+
+    .form-control.is-invalid:hover,
+    .was-validated .form-control:invalid:hover {
+        border: 2px solid rgb(244, 67, 54);
+        box-shadow: 0 0 0 0.25rem rgb(244, 67, 54, 0.25);
+        background-image: none;
+    }
+
+    .form-control.is-valid:focus,
+    .was-validated .form-control:valid:focus {
+        box-shadow: 0 0 0 0.25rem rgb(113, 178, 103, 0.25);
+        border: 2px solid rgb(113, 178, 103);
+        background-image: none;
+    }
+
+    .form-control.is-invalid:focus,
+    .was-validated .form-control:invalid:focus {
+        border: 2px solid rgb(244, 67, 54);
+        box-shadow: 0 0 0 0.25rem rgb(244, 67, 54, 0.25);
+        background-image: none;
+    }
+
+
+    #small-text {
+        color: var(--color-background);
+        font-size: 1rem;
+        margin-bottom: 0;
+    }
+
+    #text-links {
+        text-decoration: none;
+        color: var(--color-background);
+        font-size: 1rem;
+    }
+
+    #text-links:hover {
+        text-decoration-line: underline;
+    }
+
+    .user-form {
+        background: transparent;
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        border: 2px solid var(--color-background);
+        border-radius: 40px;
+        color: var(--color-background);
+        padding: 0.8rem 1rem;
+        /* mas padding para que no se vea el texto pegado al borde */
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+        font-size: 1rem;
+    }
+
+    .user-form:focus {
+        background: transparent;
+        outline: none;
+        border: 2px solid var(--color-background);
+        border-radius: 40px;
+        box-shadow: none;
+        color: var(--color-background);
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .user-form:hover {
+        background: transparent;
+        outline: none;
+        border: 2px solid var(--color-background);
+        border-radius: 40px;
+        box-shadow: none;
+        color: var(--color-background);
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+    }
+
+    .user-form::placeholder {
+        /* Blanco opaco */
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    .error {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .btn-close:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    .card-body {
+        padding: 3rem;
+    }
+
+    @media (max-width: 768px) {
+
+        .title {
+            font-size: 2rem;
+        }
+
+        .btn-accounts {
+            font-size: 0.8rem;
+        }
+
+        .user-form {
+            font-size: 0.8rem;
+        }
+
+        .error {
+            font-size: 0.8rem;
+        }
+
+        #small-text {
+            font-size: 0.8rem;
+        }
+
+        #text-links {
+            font-size: 0.8rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+    }
+</style>
+
+
+<div id="particles-js"></div>
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center vh-100 align-items-center">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-11 ">
+
+            <div class="card rounded-3 text-center transparent-card">
+                <div class="card-body">
+                    <h3 class="title">Iniciar sesión</h3>
+
+                    {% if error %}
+                    <div class="alert alert-danger alert-dismissible fade show mt-3 mb-3" role="alert">
+                        <div class="error">
+                            <span class="mb-0">{{ error }}</span>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-row mb-4 position-relative">
+                            <!-- icono de usuario -->
+                            <input type="text" class="form-control user-form" name="username" id="username"
+                                placeholder="Nombre de usuario" maxlength="30" autofocus>
+                            <i class="fas fa-user"
+                                style="position: absolute; top: 35%; right: 20px; color: rgba(255, 255, 255, 0.8);"></i>
+                        </div>
+
+                        <div class="form-row mb-4 position-relative">
+                            <input type="password" class="form-control user-form" name="password" id="password"
+                                placeholder="Contraseña" maxlength="30" autocomplete="off">
+                            <i class="fas fa-lock"
+                                style="position: absolute; top: 35%; right: 20px; color: rgba(255, 255, 255, 0.8);"></i>
+                        </div>
+
+                        <div class="form-row mb-4">
+                            <button class="btn btn-accounts w-100">Iniciar sesión</button>
+                        </div>
+                    </form>
+
+                    <div>
+                        <p id="small-text">¿No tienes una cuenta? <a class="fw-semibold" id="text-links"
+                                href="/accounts/signup">Regístrate</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- particles.js lib -->
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib -->
+
+<script>
+    particlesJS("particles-js", {
+        "particles": {
+            "number": {
+                "value": 100, // Aumenta la cantidad de partículas para una apariencia más densa
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#FFFF00" // Cambia el color de las partículas
+            },
+            "shape": {
+                "type": "edge", // Cambia la forma de las partículas
+                "stroke": {
+                    "width": 0,
+                    // Amarillo saturado o brillante
+                    "color": "#FFFF00"
+                },
+            },
+            "opacity": {
+                "value": 1,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.5,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3, // Reduce el tamaño de las partículas
+                "random": true, // Tamaño aleatorio
+                "anim": {
+                    "enable": true,
+                    "speed": 3,
+                    "size_min": 0.5,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": false,
+            },
+            "move": {
+                "enable": true,
+                "speed": 1, // Aumenta la velocidad de movimiento
+                "direction": "none", // Elimina la dirección predefinida
+                "random": true, // Dirección aleatoria
+                "straight": false, // Movimiento no lineal
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "window",
+            "events": {
+                "onhover": {
+                    "enable": false,
+                    "mode": "repulse"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "repulse"
+                },
+                "resize": true
+            },
+            "modes": {
+                "repulse": {
+                    "distance": 200,
+                    "duration": 0.4 // Reduce el tiempo de repulsión de las partículas 
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true // Detecta la resolución de la pantalla 
+    });
+</script>
+{% endblock %}

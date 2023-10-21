@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'genetic',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+# LOGIN_REDIRECT_URL = "/accounts/profile"
+LOGIN_URL = "/accounts/signin"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
