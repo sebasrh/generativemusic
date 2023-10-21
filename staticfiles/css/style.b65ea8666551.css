@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --color-background: #fff;
+    /* Fondo de la página */
+    --color-button: #88A7D0;
+    /* Color de botón */
+    --color-button-hover: #789DCA;
+    /* Color de botón al pasar el cursor */
+    --color-navigation-bar: #57BD9E;
+    /* Color de la barra de navegación */
+    --color-secondary-heading: #2CA880;
+    /* Color de títulos secundarios */
+    --color-primary-heading: #009D71;
+    /* Color de títulos principales */
+    --color-text: #333;
+    /* Color de texto */
+    --color-card: #FBFAFB;
+    /* Color de tarjetas */
+    --color-card-border: #E2E2E2;
+    --color-control: #789DCA;
+    /* Color de los controles */
+}
+
+
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    user-select: none;
+    background: var(--color-background);
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--color-primary-heading);
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--color-secondary-heading);
+}
+
+p,
+ul {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+
+li {
+    font-size: 0.875rem;
+    color: var(--color-text);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--color-button);
+    /* Color de botón */
+    --bs-btn-border-color: var(--color-button-hover);
+    /* Color de borde de botón */
+    --bs-btn-hover-bg: var(--color-button-hover);
+    /* Color de botón al pasar el cursor */
+    --bs-btn-hover-border-color: var(--color-button-hover);
+    /* Color de borde de botón al pasar el cursor */
+    --bs-btn-disabled-color: var(--color-text);
+    /* Color de texto de botón deshabilitado */
+    --bs-btn-disabled-bg: var(--color-button);
+    /* Color de botón deshabilitado */
+    --bs-btn-disabled-border-color: var(--color-button);
+    /* Color de borde de botón deshabilitado */
+    --bs-btn-focus-bg: var(--color-button-hover);
+    /* Color de botón al enfocar */
+    --bs-btn-focus-border-color: var(--color-button-hover);
+    /* Color de borde de botón al enfocar */
+    --bs-btn-active-bg: var(--color-button-hover);
+    /* Color de botón al hacer click */
+    --bs-btn-active-border-color: var(--color-button-hover);
+    /* Color de borde de botón al hacer click */
+    --bs-btn-font-size: 0.875rem;
+    /* Tamaño de texto de botón */
+    --bs-btn-font-weight: 800;
+    /* Grosor de texto de botón */
+    --bs-btn-padding-x: 1rem;
+    /* Padding horizontal de botón */
+    --bs-btn-padding-y: 0.5rem;
+    /* Padding vertical de botón */
+    --bs-btn-border-radius: 5px;
+    /* Radio de borde de botón */
+    transition: transform 0.2s ease-in-out;
+}
+
+.btn-primary:hover{
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.05);
+}
+
+@media (min-width: 767px) {
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    h3 {
+        font-size: 2rem;
+    }
+
+    p,
+    ul {
+        font-size: 1.2rem;
+    }
+
+    li {
+        font-size: 1.2rem;
+    }
+
+    .btn-primary {
+        font-size: 1.2rem;
+
+    }
+}
+
+/* Home */
+header.masthead .site-heading {
+    color: var(--color-background);
+}
+
+header.masthead .site-heading {
+    text-align: center;
+}
+
+header.masthead {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    background: no-repeat center center;
+    background-color: var(--color-button);
+    background-size: cover;
+    background-attachment: scroll;
+}
+
+header.masthead:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    opacity: 0.5;
+}
+
+header.masthead .site-heading h1,
+header.masthead .site-heading .h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+}
+
+header.masthead .site-heading .subheading {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.1;
+    display: block;
+    margin: 0.75rem 0 2rem;
+}
+
+i.rating {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+hr {
+    border : 0;
+    opacity: 1;
+    margin: 1.5rem 0;
+}
+
+footer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: transparent;
+    color: var(--color-text);
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+.thanks {
+    font-size: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.list-group-item {
+    background-color: transparent;
+    border: none;
+    padding: 1rem 1rem;
+    color: var(--color-text);
+}
+
+.ml {
+    margin-left: 3rem;
+}
+
+.full {
+    color: #fde16d;
+    font-size: 0.75rem;
+}
+
+.empty {
+    color: var(--color-text);
+    font-size: 0.75rem;
+}
+
+.mb-btn {
+    margin-bottom: 3rem;
+}
+
+.bg-stars {
+    padding-left: 0.875rem !important;
+    padding-right: 0.875rem !important;
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+    background-color: var(--color-card);
+    border-radius: 0.5rem !important;
+    box-shadow: 0 0 0 0.1rem var(--color-card-border);
+    width: min-content;
+}
+
+ul li.list-inline-item {
+    font-size: 0.68rem;
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 767px) {
+
+    header.masthead {
+        padding-top: 12.5rem;
+        padding-bottom: 12.5rem;
+    }
+
+    header.masthead .site-heading h1,
+    header.masthead .site-heading .h1 {
+        font-size: 4.875rem;
+    }
+
+    header.masthead .subheading {
+        font-size: 1.875rem;
+    }
+
+    header.masthead .site-heading .subheading {
+        font-size: 1.4rem;
+    }
+
+    .thanks {
+        font-size: 1rem;
+    }
+
+    .small {
+        font-size: 0.875rem;
+    }
+
+
+    i.rating {
+        font-size: 3rem;
+    }
+
+    .bg-stars {
+        padding-left: 1.5rem !important;
+        padding-right: 1.5rem !important;
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;       
+    }
+
+    .full {
+        font-size: 1rem;
+    }
+    
+    .empty {
+        font-size: 1rem;
+    }
+
+    ul li.list-inline-item {
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+}
