@@ -1,14 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from cloudinary.models import CloudinaryField
 
 
 class GeneratedMelody(models.Model):
     # Campos para representar la melodía
     title = models.CharField(max_length=255)
 
-    mel = models.FileField(upload_to='melodies/')
-
+    mel = CloudinaryField('melody', resource_type='auto', folder='melodies')
+    
     user_rating = models.ManyToManyField('Evaluation')
 
     average_ratings = models.FloatField(
@@ -98,7 +99,8 @@ class Album(models.Model):
 
     duration = models.FloatField(default=0.0)
 
-    img = models.ImageField(upload_to='img/', default='img/default.jpg')
+    # Imagen de la portada del álbum (opcional) - Cloudinary Field para almacenar la imagen en la nube y no en el servidor local (media) - https://cloudinary.com/documentation/django_image_and_video_upload
+    img = CloudinaryField('image')
 
     def increase_generation_number(self):
         self.generation_number += 1

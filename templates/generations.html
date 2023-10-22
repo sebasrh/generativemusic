@@ -301,7 +301,7 @@
         display: block;
     }
 
-    .submit-rating{
+    .submit-rating {
         display: none;
     }
 
@@ -384,7 +384,7 @@
             text-align: center;
         }
 
-        .submit-rating{
+        .submit-rating {
             display: block;
         }
 
@@ -417,8 +417,8 @@
                     </div>
                     <hr />
                     <div class="d-flex justify-content-start align-items-end">
-                        <img class="img img-fluid" src="{{ album.img.url }}"
-                            alt="Álbum {{ album.id }}" style="height: 100%;" />
+                        <img class="img img-fluid" src="{{ album.img.url }}" alt="Álbum {{ album.id }}"
+                            style="height: 100%;" />
                         <div class="album w-100">
                             <div class="title-album">Álbum {{ album.id }}</div>
                             <span class="text-album mb-0">{{ melodies.0.generation }} Generación •
@@ -458,7 +458,7 @@
                                     data-title="{{ melody.title  }}">
                                     <div class="melody-number">
                                         {{ forloop.counter }}
-                                        
+
                                     </div>
                                     <div class="melody-playing" id="melody-playing">
                                         <i class="fas fa-play"></i>
@@ -699,9 +699,10 @@
     document.addEventListener("DOMContentLoaded", function () {
         const colorThief = new ColorThief();
         const img = document.querySelector('.img');
+        img.setAttribute('crossorigin', 'anonymous');
 
-        // Make sure image is finished loading
-        if (img.complete) {
+
+        img.addEventListener('load', function () {
             const dominantColor = colorThief.getColor(img);
 
             console.log(dominantColor);
@@ -724,7 +725,8 @@
             // Agrega la sombra con un color específico
             const shadowColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]},0.5)`;
             header.style.boxShadow = `0 1.5rem 2rem ${shadowColor}`;
-        }
+        });
+        
     });
 
 </script>

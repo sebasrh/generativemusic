@@ -3,6 +3,6 @@ from genetic import views
 
 urlpatterns = [
     path('', views.genetic, name="genetic"),
-    path('generations/<int:generations_id>/',
+    path('generations/<int:album_id>/',
          views.generations, name="generations"),
 ]

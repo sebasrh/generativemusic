@@ -1,5 +1,6 @@
 from midi2audio import FluidSynth
 from pydub import AudioSegment
+import os
 
 def convert_midi_to_wav_mp3( file_midi, soundfont_path):
 
@@ -28,4 +29,8 @@ def convert_midi_to_wav_mp3( file_midi, soundfont_path):
     # Calculate and store the final duration
     final_duration = len(adjusted_audio) / 1000.0  # Convert milliseconds to seconds
 
+    # Delete the WAV file
+    os.remove(file_wav)
+
+    # Return the file paths and the final duration
     return file_wav, file_mp3, final_duration

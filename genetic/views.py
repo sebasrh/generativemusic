@@ -85,11 +85,11 @@ def genetic(request):
         return render(request, 'genetic.html', {'generations': generations, 'user': user})
 
 @login_required
-def generations(request, generations_id):
+def generations(request, album_id):
     user = request.user
 
     # Obtén el objeto GeneratedMusic por su clave primaria (id)
-    album = get_object_or_404(Album, pk=generations_id)
+    album = get_object_or_404(Album, pk=album_id)
 
     # Obtener la última generación de melodías
     latest_generation = album.melodies.filter(
@@ -115,12 +115,12 @@ def generations(request, generations_id):
 
 
 @login_required
-def evaluate(request, generations_id, melody_id):
+def evaluate(request, album_id, melody_id):
     user = request.user
     if request.method == 'POST':
         try:
             # Obtener el objeto GeneratedMusic por su clave primaria (id)
-            album = Album.objects.get(pk=generations_id)
+            album = Album.objects.get(pk=album_id)
 
             # Obtener el objeto Melody por su clave primaria (id)
             melody = album.melodies.get(pk=melody_id)
@@ -165,13 +165,13 @@ def evaluate(request, generations_id, melody_id):
 
 
 @login_required
-def evolve(request, generations_id):
+def evolve(request, album_id):
     user = request.user
     if user.is_superuser and request.method == 'POST':
         try:
             # Obtener el objeto GeneratedMusic por su clave primaria (id)
             album = get_object_or_404(
-                Album, pk=generations_id)
+                Album, pk=album_id)
 
             # Verificar si el número de generación actual es mayor que el número total de generaciones
             if album.generation_number > album.ga_info.num_generations:
@@ -219,7 +219,7 @@ def evolve(request, generations_id):
                 # Guardar la nueva población
                 save_population(new_pop, album)
 
-                return redirect('generations', generations_id=generations_id)
+                return redirect('generations', album_id=album_id)
         except Exception as e:
             # Manejar errores adecuadamente y mostrar mensajes de error
             response_data = {

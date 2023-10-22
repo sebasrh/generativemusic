@@ -16,6 +16,11 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Import cloudinary configuration
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'genetic',
     'accounts',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +157,10 @@ os.makedirs(MEDIA_ROOT, exist_ok=True)
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Cloudinary configuration
+cloudinary.config( 
+  cloud_name = "dgb26cwpx", 
+  api_key = "814969445269798", 
+  api_secret = "ADH70RKJir3tfN7acp546IBmKNs" 
+)
