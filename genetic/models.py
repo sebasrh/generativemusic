@@ -100,7 +100,7 @@ class Album(models.Model):
     duration = models.FloatField(default=0.0)
 
     # Imagen de la portada del álbum (opcional) - Cloudinary Field para almacenar la imagen en la nube y no en el servidor local (media) - https://cloudinary.com/documentation/django_image_and_video_upload
-    img = CloudinaryField('image')
+    img = CloudinaryField('image', default='https://res.cloudinary.com/dgb26cwpx/image/upload/v1698017763/album_cover_default_pdxmu4.png')
 
     def increase_generation_number(self):
         self.generation_number += 1

@@ -11,7 +11,7 @@ class EvaluationAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'melody__title')
 
     def melody(self, obj):
-        return obj.melody.title
+        return obj.mel.title
 
 
 @admin.register(GeneratedMelody)

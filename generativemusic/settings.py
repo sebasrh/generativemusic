@@ -29,7 +29,7 @@ import cloudinary.api
 SECRET_KEY = 'django-insecure-6ff#yat0er5o#n^b5ae*4fjhm$1=fl39&#8y0kohi3ycv2kb4o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 

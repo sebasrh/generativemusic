@@ -9,6 +9,7 @@ import os
 import pickle
 import json
 
+
 def save_population(population, album):
     # Carpeta para guardar los archivos
     folder = f"algorithm/midi_out/{album.id}"
@@ -84,6 +85,7 @@ def genetic(request):
         generations = Album.objects.all().order_by('-created_at')
         return render(request, 'genetic.html', {'generations': generations, 'user': user})
 
+
 @login_required
 def generations(request, album_id):
     user = request.user
@@ -103,7 +105,7 @@ def generations(request, album_id):
 
     # Iterar sobre las calificaciones del usuario y almacenarlas en el diccionario
     for rating in user_ratings:
-        user_ratings_data[rating.melody.id] = rating.rating
+        user_ratings_data[rating.mel.id] = rating.rating
 
     user_ratings_json = json.dumps(user_ratings_data)  # Convertir a JSON
 

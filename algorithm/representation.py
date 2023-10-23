@@ -4,9 +4,10 @@
 
 import random
 import os
+import cloudinary
 from mido import Message, MidiFile, MidiTrack, MetaMessage, bpm2tempo
 from algorithm.music_data import *
-from algorithm.midi_utils import convert_midi_to_wav_mp3
+from algorithm.midi_utils import convert_midi_to_mp3
 from genetic.models import GeneratedMelody
 
 
@@ -134,10 +135,12 @@ class representation:
 
     def generate_melody(self, input_mel, album):
 
+        # Título de la melodía
         title = f"melody_{self.melody_counter}"
         self.melody_counter += 1
 
-        midi_file_path = f"{title}.mid"
+        # Nombre del archivo MIDI 
+        midi_file = f"{title}.mid"
 
         # Crea una carpeta para guardar los archivos de la melodía si no existe
         folder = f"media/melodies/{album.id}/{album.generation_number}"
@@ -146,26 +149,31 @@ class representation:
             os.makedirs(folder)
 
         # Convierte la melodía en un archivo MIDI
-        self.melody_to_midi(input_mel, midi_file_path, folder)
+        self.melody_to_midi(input_mel, midi_file, folder)
 
         # Convierte el archivo MIDI en un archivo WAV y MP3
-        midi = f"{folder}/{midi_file_path}"
+        midi = f"{folder}/{midi_file}"
+
+        # Ruta del soundfont a utilizar 
         soundfont_path = "Chorium/Chorium.SF2"
 
-        file_wav, file_mp3, final_duration = convert_midi_to_wav_mp3(midi, soundfont_path)
-
-        file_mp3 = file_mp3.replace("media/", "")
-
+        # Convierte el archivo MIDI en un archivo WAV y MP3
+        mp3, final_duration = convert_midi_to_mp3(midi, soundfont_path)
         
+        # Sube el archivo MP3 a Cloudinary
+        melo = cloudinary.uploader.upload(mp3, resource_type="auto", folder=f"melodies/{album.id}/{album.generation_number}/")
+
+        # Crea una instancia de GeneratedMelody
         mel = GeneratedMelody(
             title=title,
-            mel=file_mp3,
+            # Guarda el archivo MP3 en Cloudinary
+            mel=melo['url'],
             generation=album.generation_number,
             duration=final_duration,
         )
 
+        # Guarda la melodía en la base de datos
         mel.save()
-
         album.melodies.add(mel)
 
 # Clase Note

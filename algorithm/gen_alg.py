@@ -110,6 +110,10 @@ def evolve_population(population, alg_args):
     Salida: population: list, una lista de melodías
     """
 
+    for ind in population:
+        print('poblacion')
+        print(ind.fitness.values)
+
     toolbox.register("mate", cx_music)  # Cruce
     toolbox.register("mutate", mut_melody)  # Mutación
     toolbox.register("select", tools.selRoulette)  # Selección por ruleta
@@ -120,11 +124,19 @@ def evolve_population(population, alg_args):
     # Seleccionar los individuos elite
     elite = tools.selBest(population, num_elite)
 
+    for ind in elite:
+        print('elite')
+        print(ind.fitness.values)
+
     # Clonar los individuos elite 
     elite_clone = list(map(toolbox.clone, elite))
 
     # Seleccionar los padres
     seleted = toolbox.select(population, alg_args.mu)
+
+    for ind in seleted:
+        print('seleccionados')
+        print(ind.fitness.values)
 
     # Clonar los padres para la descendencia
     seleted_clone = list(map(toolbox.clone, seleted))
@@ -157,6 +169,10 @@ def evolve_population(population, alg_args):
 
     # Agregar los individuos elite a la descendencia
     offspring.extend(elite_clone)
+
+    for ind in offspring:
+        print('descendencia')
+        print(ind.fitness.values)
 
     # Reemplazar la población actual con la descendencia
     population[:] = offspring
