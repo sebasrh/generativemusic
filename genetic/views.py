@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+import pickle
+import json
+import cloudinary
+import os
+import shutil
 from algorithm.gen_alg import algorithm_args, generate_population, evolve_population
 from algorithm.representation import representation
 from algorithm.main import main
 from .models import Album, Evaluation
-from django.http import JsonResponse
-import os
-import pickle
-import json
+from .forms import AlbumImageForm
 
 
 def save_population(population, album):
@@ -32,6 +35,10 @@ def save_population(population, album):
     with open(file_name, "w") as file:
         for melody in population:
             file.write(str(melody) + "\n")
+
+    # Guardar el archivo txt en Cloudinary
+    cloudinary.uploader.upload(file_name, resource_type="auto",
+                               public_id=f"algorithm/{album.id}/population_{album.generation_number}.txt")
 
 
 def load_population(album):
@@ -82,15 +89,91 @@ def genetic(request):
 
         return redirect('genetic')
     else:
-        generations = Album.objects.all().order_by('-created_at')
-        return render(request, 'genetic.html', {'generations': generations, 'user': user})
+        albums = Album.objects.all().order_by('-created_at')
+        return render(request, 'genetic.html', {'albums': albums, 'user': user})
+
+
+@login_required
+def delete_genetic(request, album_id):
+    user = request.user
+    if user.is_superuser and request.method == 'POST':
+        try:
+            album = get_object_or_404(Album, pk=album_id)
+
+            # Eliminar los archivos de la carpeta midi_out
+            folder_pop = f"algorithm/midi_out/{album.id}/"
+            if os.path.exists(folder_pop):
+                # eliminar la carpeta aunque no esté vacía
+                shutil.rmtree(f"{folder_pop}")
+
+            # Eliminar los archivos de Cloudinary
+            cloudinary.uploader.destroy(f"algorithm/{album.id}/")
+
+            # Eliminar el album de la carpeta media/melodies
+            folder_album = f"media/melodies/{album.id}/"
+            if os.path.exists(folder_album):
+                # eliminar la carpeta aunque no esté vacía
+                shutil.rmtree(f"{folder_album}")
+
+            # Eliminar la carpeta de Cloudinary
+            cloudinary.uploader.destroy(f"melodies/{album.id}/")
+
+            # Eliminar el álbum
+            album.melodies.all().delete()
+            album.musical_representation.delete()
+            album.ga_info.delete()
+            album.delete()
+
+            return redirect('genetic')
+
+        except Exception as e:
+            response_data = {
+                'success': False,
+                'error_message': str(e)
+            }
+            return JsonResponse(response_data, status=400)
+
+
+@login_required
+def uploadAlbumCover(request, album_id):
+    # Obtener el usuario actual
+    user = request.user
+
+    # Obtener el objeto Album por su clave primaria (id)
+    album = get_object_or_404(Album, pk=album_id)
+
+    if user.is_superuser and request.method == 'POST':
+        try:
+            # Obtener la imagen del formulario
+            form = AlbumImageForm(request.POST, request.FILES, instance=album)
+
+            # Verificar si el formulario es válido
+            if form.is_valid():
+                form.save()
+                return redirect('genetic')
+            else:
+                form = AlbumImageForm(instance=album)
+        
+        except Exception as e:
+            response_data = {
+                'success': False,
+                'error_message': str(e)
+            }
+            return JsonResponse(response_data, status=400)
+        
+    elif user.is_superuser and request.method == 'GET':
+
+        # Obtener el formulario
+        form = AlbumImageForm(instance=album)
+
+        return render(request, 'uploadAlbumCover.html', {'form': form, 'user': user})
 
 
 @login_required
 def generations(request, album_id):
     user = request.user
 
-    # Obtén el objeto GeneratedMusic por su clave primaria (id)
+    # Obtén el objeto Album por su clave primaria (id)
     album = get_object_or_404(Album, pk=album_id)
 
     # Obtener la última generación de melodías
@@ -121,7 +204,7 @@ def evaluate(request, album_id, melody_id):
     user = request.user
     if request.method == 'POST':
         try:
-            # Obtener el objeto GeneratedMusic por su clave primaria (id)
+            # Obtener el objeto Album por su clave primaria (id)
             album = Album.objects.get(pk=album_id)
 
             # Obtener el objeto Melody por su clave primaria (id)
@@ -171,7 +254,7 @@ def evolve(request, album_id):
     user = request.user
     if user.is_superuser and request.method == 'POST':
         try:
-            # Obtener el objeto GeneratedMusic por su clave primaria (id)
+            # Obtener el objeto Album por su clave primaria (id)
             album = get_object_or_404(
                 Album, pk=album_id)
 

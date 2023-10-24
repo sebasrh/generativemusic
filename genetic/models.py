@@ -8,7 +8,7 @@ class GeneratedMelody(models.Model):
     # Campos para representar la melodía
     title = models.CharField(max_length=255)
 
-    mel = CloudinaryField('melody', resource_type='auto', folder='melodies')
+    mel = CloudinaryField('melody')
     
     user_rating = models.ManyToManyField('Evaluation')
 

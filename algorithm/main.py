@@ -14,8 +14,6 @@ scales_sig = ["major", "minor"]
 
 bpm = [60, 70, 80, 90, 100, 110, 120, 130, 140, 160]
 
-bt = ['True', 'False']
-
 aos = ['True', 'False']
 
 def main():
@@ -28,12 +26,9 @@ def main():
 
     tempo = random.choice(bpm)
 
-    back_track = random.choice(bt)
+    back_track = 'True'
     
-    if back_track == 'True':
-        arp_or_scale = random.choice(aos)
-    else:
-        arp_or_scale = 'False'
+    arp_or_scale = random.choice(aos)
         
     # Crear objetos y argumentos
     rep_model = MusicalRepresentation(

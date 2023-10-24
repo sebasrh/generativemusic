@@ -39,9 +39,18 @@
         padding: 0.8rem 1rem;
         border-radius: 40px;
         box-shadow: 0px 0px 10px 0px #fbfafb36;
+        transition: all 0.3s ease-in-out;
     }
 
     .btn-accounts:hover {
+        background-color: var(--color-background);
+        border: none;
+        border-radius: 40px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+        transform: scale(1.025);
+    }
+
+    .btn-accounts:active {
         background-color: var(--color-background);
         border: none;
         border-radius: 40px;
@@ -198,7 +207,82 @@
         .card-body {
             padding: 2rem;
         }
+
+        .feedback_password {
+            font-size: 0.6rem;
+        }
+
+        .feedback_user {
+            font-size: 0.6rem;
+        }
     }
+
+    .feedback_password {
+        display: none;
+        position: absolute;
+        top: 120%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        color: var(--color-text);
+        background-color: var(--color-background);
+        border-radius: 0.5rem;
+        z-index: 1;
+        border: #fff solid 2px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+        text-align: start;
+    }
+
+    /* Una flecha que apunta hacia arriba */
+    .feedback_password::after {
+        content: ""; /* Elimina el contenido del elemento */
+        position: absolute; /* Permite posicionar el elemento */
+        top: -10px; /* Posiciona el elemento 10px arriba del elemento padre */
+        left: 50%; /* Posiciona el elemento 50% a la izquierda del elemento padre */
+        transform: translateX(-50%); /* Centra el elemento */
+        border-width: 0 10px 10px; /* Crea un triangulo */
+        border-style: solid; /* Crea un triangulo */
+        border-color: var(--color-background) transparent; /* Crea un triangulo */
+        display: block; /* Muestra el elemento */
+        width: 0; /* Oculta el elemento */
+        z-index: 1; /* Posiciona el elemento sobre el elemento padre */
+    }
+
+    .feedback_user {
+        display: none;
+        position: absolute;
+        top: 120%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        color: var(--color-text);
+        background-color: var(--color-background);
+        border-radius: 0.5rem;
+        z-index: 1;
+        border: #fff solid 2px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+        text-align: start;
+    }
+
+    /* Una flecha que apunta hacia arriba */
+    .feedback_user::after {
+        content: ""; /* Elimina el contenido del elemento */
+        position: absolute; /* Permite posicionar el elemento */
+        top: -10px; /* Posiciona el elemento 10px arriba del elemento padre */
+        left: 50%; /* Posiciona el elemento 50% a la izquierda del elemento padre */
+        transform: translateX(-50%); /* Centra el elemento */
+        border-width: 0 10px 10px; /* Crea un triangulo */
+        border-style: solid; /* Crea un triangulo */
+        border-color: var(--color-background) transparent; /* Crea un triangulo */
+        display: block; /* Muestra el elemento */
+        width: 0; /* Oculta el elemento */
+        z-index: 1; /* Posiciona el elemento sobre el elemento padre */
+    }
+
 </style>
 
 <div id="particles-js"></div>
@@ -224,22 +308,34 @@
 
                         <div class="form-row mb-4 position-relative">
                             <input type="text" class="form-control user-form" name="username" id="username"
-                                placeholder="Nombre de usuario" maxlength="30" autofocus>
+                                placeholder="Nombre de usuario" maxlength="20">
                             <i class="fas fa-user"
                                 style="position: absolute; top: 35%; right: 20px; color: rgba(255, 255, 255, 0.8);"></i>
+
+                            <div class="feedback_user" id="user-feedback">
+                                <span><strong>Requisitos</strong></span>
+                                <br>
+                                <span>El nombre de usuario debe tener al menos 4 caracteres</span>
+                            </div>
                         </div>
 
                         <div class="form-row mb-4 position-relative">
                             <input type="password" class="form-control user-form" name="password1" id="password1"
-                                placeholder="Contraseña" maxlength="30" autocomplete="off">
+                                placeholder="Contraseña" maxlength="20" autocomplete="off">
                             <i class="fas fa-lock"
                                 style="position: absolute; top: 35%; right: 20px; color: rgba(255, 255, 255, 0.8);"></i>
+                            <!-- Cuando se hace click en el input, se muestra un mensaje que indica los requisitos de la contraseña -->
+                            <div class="feedback_password" id="password1-feedback">
+                                <span><strong>Requisitos</strong></span>
+                                <br>
+                                <span>La contraseña debe tener al menos 8 caracteres</span>
+                            </div>
                         </div>
 
                         <div class="form-row mb-4 position-relative">
 
                             <input type="password" class="form-control user-form" name="password2" id="password2"
-                                placeholder="Confirmar contraseña" maxlength="30" autocomplete="off">
+                                placeholder="Confirmar contraseña" maxlength="20" autocomplete="off">
                             <i class="fas fa-lock"
                                 style="position: absolute; top: 35%; right: 20px; color: rgba(255, 255, 255, 0.8);"></i>
                         </div>
@@ -261,11 +357,74 @@
         </div>
     </div>
 </div>
+<script>
+    // Cuando se hace click en el input, se muestra un mensaje que indica los requisitos de la contraseña
+    document.getElementById("password1").addEventListener("click", function () {
+        document.getElementById("password1-feedback").style.display = "block";
+    });
+
+    // Cuando se hace click fuera del input, se oculta el mensaje que indica los requisitos de la contraseña
+    document.addEventListener("click", function (e) {
+        if (e.target.id !== "password1") {
+            document.getElementById("password1-feedback").style.display = "none";
+        }
+    });
+
+    // cuando se hace tab 
+    document.getElementById("password1").addEventListener("focus", function () {
+        document.getElementById("password1-feedback").style.display = "block";
+    });
+
+    // cuando se hace tab fuera del input
+    document.getElementById("password1").addEventListener("focusout", function () {
+        document.getElementById("password1-feedback").style.display = "none";
+    });
+
+    
+    // Si la contraseña cumple con los requisitos, se muestra el mensaje que indica los requisitos de la contraseña
+    document.getElementById("password1").addEventListener("input", function () {
+        const password = this.value.trim();
+        const passwordField = document.getElementById("password1");
+        if (password.length >= 8) {
+            document.getElementById("password1-feedback").style.display = "none";
+        } else {
+            document.getElementById("password1-feedback").style.display = "block";
+        }
+    });
+</script>
 
 <script>
+    // Cuando se hace click en el input, se muestra un mensaje que indica los requisitos del nombre de usuario
+    document.getElementById("username").addEventListener("click", function () {
+        document.getElementById("user-feedback").style.display = "block";
+    });
+
+    // Cuando se hace click fuera del input, se oculta el mensaje que indica los requisitos del nombre de usuario
+    document.addEventListener("click", function (e) {
+        if (e.target.id !== "username") {
+            document.getElementById("user-feedback").style.display = "none";
+        }
+    });
+
+    // cuando se hace tab
+    document.getElementById("username").addEventListener("focus", function () {
+        document.getElementById("user-feedback").style.display = "block";
+    });
+
+    // cuando se hace tab fuera del input
+    document.getElementById("username").addEventListener("focusout", function () {
+        document.getElementById("user-feedback").style.display = "none";
+    });
+
+    // Si el nombre de usuario cumple con los requisitos, se muestra el mensaje que indica los requisitos del nombre de usuario
     document.getElementById("username").addEventListener("input", function () {
         const username = this.value.trim();
         const usernameField = document.getElementById("username");
+        if (username.length >= 4) {
+            document.getElementById("user-feedback").style.display = "none";
+        } else {
+            document.getElementById("user-feedback").style.display = "block";
+        }
         if (username !== "" && username.length >= 4) {
             // Realiza una solicitud AJAX al servidor para verificar el nombre de usuario
             $.ajax({
@@ -279,9 +438,14 @@
                     if (data.is_taken) {
                         usernameField.classList.add("is-invalid");
                         usernameField.classList.remove("is-valid");
+                        // cambia el color del icono de usuario
+                        document.querySelector(".fa-user").style.color = "rgb(244, 67, 54)";
+                        
                     } else {
                         usernameField.classList.add("is-valid");
                         usernameField.classList.remove("is-invalid");
+                        // cambia el color del icono de usuario
+                        document.querySelector(".fa-user").style.color = "rgb(113, 178, 103)";
                     }
                 }
             });
@@ -289,6 +453,8 @@
         else {
             usernameField.classList.remove("is-valid");
             usernameField.classList.remove("is-invalid");
+            // cambia el color del icono de usuario
+            document.querySelector(".fa-user").style.color = "rgba(255, 255, 255, 0.8)";
         }
     });
 </script>

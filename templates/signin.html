@@ -39,9 +39,18 @@
         padding: 0.8rem 1rem;
         border-radius: 40px;
         box-shadow: 0px 0px 10px 0px #fbfafb36;
+        transition: all 0.3s ease-in-out;
     }
 
     .btn-accounts:hover {
+        background-color: var(--color-background);
+        border: none;
+        border-radius: 40px;
+        box-shadow: 0px 0px 10px 0px #fbfafb36;
+        transform: scale(1.025);
+        }
+
+    .btn-accounts:active {
         background-color: var(--color-background);
         border: none;
         border-radius: 40px;
@@ -223,7 +232,7 @@
                         <div class="form-row mb-4 position-relative">
                             <!-- icono de usuario -->
                             <input type="text" class="form-control user-form" name="username" id="username"
-                                placeholder="Nombre de usuario" maxlength="30" autofocus>
+                                placeholder="Nombre de usuario" maxlength="30" >
                             <i class="fas fa-user"
                                 style="position: absolute; top: 35%; right: 20px; color: rgba(255, 255, 255, 0.8);"></i>
                         </div>

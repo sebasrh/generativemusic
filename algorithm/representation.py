@@ -78,7 +78,7 @@ class representation:
                         Message('note_off', note=note.note_pitch, velocity=0, time=beat_val))
 
         # Pista de Acompañamiento
-        if self.back_track:
+        if self.back_track is True:
             self.add_backing_track(mid)
             print("Pista de acompañamiento agregada")
 
@@ -155,7 +155,7 @@ class representation:
         midi = f"{folder}/{midi_file}"
 
         # Ruta del soundfont a utilizar 
-        soundfont_path = "Chorium/Chorium.SF2"
+        soundfont_path = "algorithm/Chorium/Chorium_fork.sf2"
 
         # Convierte el archivo MIDI en un archivo WAV y MP3
         mp3, final_duration = convert_midi_to_mp3(midi, soundfont_path)

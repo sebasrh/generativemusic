@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import cloudinary.api
+import cloudinary.uploader
+import cloudinary
 from pathlib import Path
 import os
 
@@ -17,9 +20,6 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Import cloudinary configuration
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +29,7 @@ import cloudinary.api
 SECRET_KEY = 'django-insecure-6ff#yat0er5o#n^b5ae*4fjhm$1=fl39&#8y0kohi3ycv2kb4o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'accounts',
     'cloudinary',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -153,8 +154,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Cloudinary configuration
-cloudinary.config( 
-  cloud_name = "dgb26cwpx", 
-  api_key = "814969445269798", 
-  api_secret = "ADH70RKJir3tfN7acp546IBmKNs" 
+cloudinary.config(
+    cloud_name="dgb26cwpx",
+    api_key="814969445269798",
+    api_secret="ADH70RKJir3tfN7acp546IBmKNs"
 )

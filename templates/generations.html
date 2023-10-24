@@ -60,7 +60,6 @@
     #btnPrev,
     #btnNext,
     #btnPlay {
-        cursor: pointer;
         /* Cambia el cursor al pasar el mouse */
         border: none;
         /* Elimina el borde del botón */
@@ -142,6 +141,7 @@
 
     /* Estilo personalizado para el botón de reproducción Plyr */
     button.plyr__control[data-plyr="mute"] {
+        cursor: default;
         color: var(--color-background);
         transform: scale(1);
         /* Color verde similar al de Spotify */

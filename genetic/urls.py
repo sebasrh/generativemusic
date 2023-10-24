@@ -9,4 +9,8 @@ urlpatterns = [
 
      path('generations/<int:album_id>/evaluate/<int:melody_id>/',
           views.evaluate, name="evaluate"),
+
+     path('delete/<int:album_id>/', views.delete_genetic, name='delete_genetic'),
+
+     path('upload/<int:album_id>/', views.uploadAlbumCover, name='uploadAlbumCover')
 ]
