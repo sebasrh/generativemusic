@@ -2,8 +2,6 @@
 
 {% block content %}
 <style>
-    
-
     /* Home */
     header.masthead .site-heading {
         color: var(--color-background);
@@ -58,7 +56,6 @@
 
     hr {
         border: 0;
-        opacity: 1;
         margin: 1.5rem 0;
     }
 
@@ -316,148 +313,220 @@
                     Tras realizar la investigación pertinente, se determinó que las técnicas que mejor se adaptan a los
                     objetivos de este proyecto son:
                 </p>
-                <ul class="mb-2 list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <strong>•</strong>
-                        <div class="ms-2 me-auto">
-                            Algoritmos Genéticos (AG).
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <strong>•</strong>
-                        <div class="ms-2 me-auto">
-                            Redes Neuronales Recurrentes (RNR).
-                        </div>
-                    </li>
-                </ul>
-                <p>
-                    Se comenzó con la implementación de los <strong>AG</strong> debido a la necesidad de involucrar a
-                    humanos en la
-                    evaluación de la calidad de la música generada, un proceso que puede resultar bastante demorado. Por
-                    otro lado, las <strong>RNR</strong> se implementarán en un futuro para comparar los resultados de
-                    ambas técnicas.
-                </p>
-            </div>
-            <!-- Divider -->
-            <hr />
-            <!-- Post preview -->
-            <div>
-                <h2>Algoritmos Genéticos</h2>
-                <p>
-                    Resumiendo, son una técnica de optimización basada en la teoría de la evolución de Darwin. En el
-                    caso de la música, se utiliza para generar piezas musicales que se adapten a ciertos criterios de
-                    calidad, como por ejemplo, que sean agradables al oído humano.
-                </p>
-                <h3>Funcionamiento</h3>
-                <p>
-                    El funcionamiento básico de un <strong>AG</strong> es el siguiente:
-                </p>
-                <ol class="list-group list-group-numbered">
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-3 me-auto">
-                            Generar una población inicial aleatoria de individuos (piezas musicales).
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-3 me-auto">
-                            Calcular aptitud de cada individuo (evaluar la calidad de la pieza musical).
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-3 me-auto">
-                            Seleccionar (probabilísticamente) en base a su aptitud a los individuos que pasarán a la
-                            siguiente generación.
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-3 me-auto">
-                            Aplicar operadores genéticos (cruza y mutación) para generar nuevos individuos.
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-3 me-auto">
-                            Repetir desde el paso 2 hasta que se cumpla un criterio de parada (número de generaciones).
-                        </div>
-                    </li>
-                </ol>
 
-            </div>
-            <!-- Divider -->
-            <hr />
-            <!-- Post preview -->
-            <div>
-                <h2>Necesito tu ayuda</h2>
-                <p>
-                    Para evaluar la calidad de las piezas musicales generadas, necesito que me ayudes a calificarlas.
-                    Para ello, se ha implementado un sistema de valoración por estrellas.
-                </p>
-                <div class="slider-container">
-                    <div class="slider-fade-start"></div>
-                    <div class="slider-fade-end"></div>
-                    <div class="slider-list" id="slider-list">
+                <div class="accordion" id="techniquesAccordion">
+                    <!-- Algoritmos Genéticos -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="geneticHeading">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#geneticCollapse" aria-expanded="false" aria-controls="geneticCollapse">
+                                Algoritmos Genéticos <span class="fst-italic">(AG)</span>
+                            </button>
+                        </h2>
+                        <div id="geneticCollapse" class="accordion-collapse collapse"
+                            aria-labelledby="geneticHeading">
+                            <div class="accordion-body">
+                                <h2>Algoritmos Genéticos</h2>
+                                <p>
+                                    Resumiendo, son una técnica de optimización basada en la teoría de la evolución
+                                    de Darwin. En el
+                                    caso de la música, se utiliza para generar piezas musicales que se adapten a
+                                    ciertos criterios de
+                                    calidad, como por ejemplo, que sean agradables al oído humano.
+                                </p>
+                                <h3>Funcionamiento</h3>
+                                <p>
+                                    El funcionamiento básico de un <strong>AG</strong> es el siguiente:
+                                </p>
+                                <ol class="list-group list-group-numbered">
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-3 me-auto">
+                                            Generar una población inicial aleatoria de individuos <span
+                                                class="fst-italic">(piezas
+                                                musicales)</span>.
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-3 me-auto">
+                                            Calcular aptitud de cada individuo <span class="fst-italic">(evaluar la
+                                                calidad de la pieza
+                                                musical)</span>.
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-3 me-auto">
+                                            Seleccionar <span class="fst-italic">(probabilísticamente)</span> en
+                                            base a su aptitud a los
+                                            individuos que pasarán a la
+                                            siguiente generación.
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-3 me-auto">
+                                            Aplicar operadores genéticos <span class="fst-italic">(cruza y
+                                                mutación)</span> para generar
+                                            nuevos individuos.
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-3 me-auto">
+                                            Repetir desde el paso 2 hasta que se cumpla un criterio de parada <span
+                                                class="fst-italic ">(número de generaciones)</span>.
+                                        </div>
+                                    </li>
+                                </ol>
 
-                        <div class="slider-item">
-                            <div class="my-3">
-                                <p class="mb-0">Muy Mala</p>
-                                <i class="fa-solid fa-face-dizzy rating" style="color: #FF4E3A;"></i>
-                                <div class="d-flex bg-stars">
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star empty"></i>
-                                    <i class="fa fa-star empty"></i>
-                                    <i class="fa fa-star empty"></i>
-                                    <i class="fa fa-star empty"></i>
+                                <h3>Necesito tu ayuda</h3>
+                                <p>
+                                    Para evaluar la calidad de las piezas musicales generadas, necesito que me
+                                    ayudes a calificarlas.
+                                    Para ello, se ha implementado un sistema de valoración por estrellas.
+                                </p>
+                                <div class="slider-container">
+                                    <div class="slider-fade-start"></div>
+                                    <div class="slider-fade-end"></div>
+                                    <div class="slider-list" id="slider-list">
+
+                                        <div class="slider-item">
+                                            <div class="my-3">
+                                                <p class="mb-0">Muy Mala</p>
+                                                <i class="fa-solid fa-face-dizzy rating" style="color: #FF4E3A;"></i>
+                                                <div class="d-flex bg-stars">
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slider-item">
+                                            <div class="my-3">
+                                                <p class="mb-0">Mala</p>
+                                                <div><i class="fa-solid fa-face-frown rating"
+                                                        style="color: #FE903B;"></i></div>
+                                                <div class="d-flex bg-stars">
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slider-item">
+                                            <div class="my-3">
+                                                <p class="mb-0">Regular</p>
+                                                <div><i class="fa-solid fa-face-meh rating" style="color: #FFDE49;"></i>
+                                                </div>
+                                                <div class="d-flex bg-stars">
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slider-item">
+                                            <div class="my-3">
+                                                <p class="mb-0">Buena</p>
+                                                <div><i class="fa-solid fa-face-smile rating"
+                                                        style="color: #AEF557;"></i></div>
+                                                <div class="d-flex bg-stars">
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star empty"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="slider-item">
+                                            <div class="my-3">
+                                                <p class="mb-0">Muy Buena</p>
+                                                <div><i class="fa-solid fa-face-laugh rating"
+                                                        style="color: #25BA18; "></i></div>
+                                                <div class="d-flex bg-stars">
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                    <i class="fa fa-star full"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end align-items-center  mt-5 mb-5">
+                                    <a class="btn btn-primary " id="btn" href="/genetic">
+                                        Ir a Calificar <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="slider-item">
-                            <div class="my-3">
-                                <p class="mb-0">Mala</p>
-                                <div><i class="fa-solid fa-face-frown rating" style="color: #FE903B;"></i></div>
-                                <div class="d-flex bg-stars">
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star empty"></i>
-                                    <i class="fa fa-star empty"></i>
-                                    <i class="fa fa-star empty"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slider-item">
-                            <div class="my-3">
-                                <p class="mb-0">Regular</p>
-                                <div><i class="fa-solid fa-face-meh rating" style="color: #FFDE49;"></i></div>
-                                <div class="d-flex bg-stars">
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star empty"></i>
-                                    <i class="fa fa-star empty"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slider-item">
-                            <div class="my-3">
-                                <p class="mb-0">Buena</p>
-                                <div><i class="fa-solid fa-face-smile rating" style="color: #AEF557;"></i></div>
-                                <div class="d-flex bg-stars">
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star empty"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slider-item">
-                            <div class="my-3">
-                                <p class="mb-0">Muy Buena</p>
-                                <div><i class="fa-solid fa-face-laugh rating" style="color: #25BA18; "></i></div>
-                                <div class="d-flex bg-stars">
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
-                                    <i class="fa fa-star full"></i>
+                    </div>
+
+                    <!-- Redes Neuronales Recurrentes -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="rnnHeading">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#rnnCollapse" aria-expanded="false" aria-controls="rnnCollapse">
+                                Redes Neuronales Recurrentes <span class="fst-italic">(RNR)</span>
+                            </button>
+                        </h2>
+                        <div id="rnnCollapse" class="accordion-collapse collapse" aria-labelledby="rnnHeading">
+                            <div class="accordion-body">
+                                <h2>Redes Neuronales Recurrentes</h2>
+                                <p>
+                                    Son un tipo de red neuronal artificial que puede entender y procesar datos en
+                                    secuencia, es decir,
+                                    que pueden recordar información de lo que ha sucedido en el pasado para tomar
+                                    decisiones en el
+                                    presente. Esto las hace ideales para la generación de música, ya que la música
+                                    es una secuencia de
+                                    notas que se reproducen en el tiempo.
+                                </p>
+                                <h3>Funcionamiento</h3>
+                                <p>
+                                    El funcionamiento básico de una <strong>RNR</strong> es el siguiente:
+                                </p>
+                                <!-- Funcionamiento de una RNR -->
+                                <ol class="list-group list-group-numbered">
+                                    <!-- Se crea un corpus de sonidos -->
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-3 me-auto">
+                                            Se crea un corpus de sonidos <span class="fst-italic">(conjunto de
+                                                piezas musicales)</span>.
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-3 me-auto">
+                                            Preparar el corpus de sonidos para que pueda ser procesado por la red
+                                            neuronal <span class="fst-italic">(convertir las piezas musicales a una
+                                                representación
+                                                numérica)</span>.
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-3 me-auto">
+                                            Entrenar la red neuronal <span class="fst-italic">(aprender a generar
+                                                notas
+                                                musicales)</span>.
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-3 me-auto">
+                                            Generar notas musicales <span class="fst-italic">(componer
+                                                música)</span>.
+                                        </div>
+                                    </li>
+                                </ol>
+                                <div class="d-flex justify-content-end align-items-center mt-5 mb-5">
+                                    <a class="btn btn-primary " id="btn" href="/lstm">
+                                        Ir a Componer <i class="fa-solid fa-chevron-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -466,23 +535,19 @@
             </div>
             <!-- Divider -->
             <hr />
-            <div class="d-flex justify-content-end align-items-center">
-                <a class="btn btn-primary " id="btn" href="/genetic">
-                    Ir a Calificar <i class="fa-solid fa-chevron-right"></i>
-                </a>
-            </div>
-            <!-- Divider -->
-            <hr />
             <!-- Post preview -->
-            <h2>Agradecimiento</h2>
-            <p>
-                Agradezco sinceramente su interés y contribución a este proyecto.
-            </p>
-            <p>
-                ¡Gracias!🙏
-            </p>
+            <div>
+                <h2>Agradecimiento</h2>
+                <p>
+                    Agradezco sinceramente su interés y contribución a este proyecto.
+                </p>
+                <p>
+                    ¡Gracias!🙏
+                </p>
+            </div>
         </div>
     </div>
+</div>
 </div>
 <hr />
 <!-- Footer -->

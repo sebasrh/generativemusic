@@ -88,9 +88,14 @@ def genetic(request):
         album.save()
 
         return redirect('genetic')
-    else:
+
+    elif request.method == 'GET':
         albums = Album.objects.all().order_by('-created_at')
         return render(request, 'genetic.html', {'albums': albums, 'user': user})
+
+    else:
+        # Si el usuario no es superusuario, redirigir a la página de inicio
+        return redirect('index')
 
 
 @login_required
@@ -106,17 +111,11 @@ def delete_genetic(request, album_id):
                 # eliminar la carpeta aunque no esté vacía
                 shutil.rmtree(f"{folder_pop}")
 
-            # Eliminar los archivos de Cloudinary
-            cloudinary.uploader.destroy(f"algorithm/{album.id}/")
-
             # Eliminar el album de la carpeta media/melodies
             folder_album = f"media/melodies/{album.id}/"
             if os.path.exists(folder_album):
                 # eliminar la carpeta aunque no esté vacía
                 shutil.rmtree(f"{folder_album}")
-
-            # Eliminar la carpeta de Cloudinary
-            cloudinary.uploader.destroy(f"melodies/{album.id}/")
 
             # Eliminar el álbum
             album.melodies.all().delete()
@@ -129,9 +128,12 @@ def delete_genetic(request, album_id):
         except Exception as e:
             response_data = {
                 'success': False,
-                'error_message': str(e)
+                'error_message': str(e),
             }
             return JsonResponse(response_data, status=400)
+    else:
+        # Si el usuario no es superusuario, redirigir a la página de inicio
+        return redirect('index')
 
 
 @login_required
@@ -153,20 +155,24 @@ def uploadAlbumCover(request, album_id):
                 return redirect('genetic')
             else:
                 form = AlbumImageForm(instance=album)
-        
+
         except Exception as e:
             response_data = {
                 'success': False,
                 'error_message': str(e)
             }
             return JsonResponse(response_data, status=400)
-        
+
     elif user.is_superuser and request.method == 'GET':
 
         # Obtener el formulario
         form = AlbumImageForm(instance=album)
 
         return render(request, 'uploadAlbumCover.html', {'form': form, 'user': user})
+
+    else:
+        # Si el usuario no es superusuario, redirigir a la página de inicio
+        return redirect('index')
 
 
 @login_required
@@ -312,3 +318,41 @@ def evolve(request, album_id):
                 'error_message': str(e)
             }
             return JsonResponse(response_data, status=400)
+
+    else:
+        # Si el usuario no es superusuario, redirigir a la página de inicio
+        return redirect('index')
+
+
+# Vista de las 10 mejores melodías de todos los albums
+@login_required
+def top_rated(request):
+    if request.method == 'GET':
+        # Obtener todos los albums
+        albums = Album.objects.all()
+
+        # Obtener todas las melodías de todos los albums
+        melodies = []
+
+        # Iterar sobre los albums y obtener todas las melodías
+        for album in albums:
+            melodies += album.melodies.all()
+
+        # Obtener las melodías calificadas
+        top_rated_melodies = [mel for mel in melodies if mel.average_ratings > 0.0]
+
+        # Ordenar las melodías por calificación promedio y número de calificaciones
+        top_rated_melodies.sort(key=lambda x: (x.average_ratings, x.user_rating.all().count()), reverse=True)
+
+        # Obtener las 10 mejores melodías
+        top_rated_melodies = top_rated_melodies[:10]
+
+        # Obtener el álbum de cada melodía
+        for melody in top_rated_melodies:
+            melody.album = melody.album_set.first()
+            
+        # Si no hay melodías, mostrar un mensaje
+        if not top_rated_melodies:
+            return render(request, 'top_rated.html', {'message': 'No hay melodías calificadas'})
+
+        return render(request, 'top_rated.html', {'melodies': top_rated_melodies})

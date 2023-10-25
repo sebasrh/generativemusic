@@ -215,19 +215,6 @@
         display: block;
     }
 
-
-    /* Cunado la tabla es pequeña, oculta el número de melodía */
-
-    @media (max-width: 768px) {
-        .melody-number {
-            display: none;
-        }
-
-        .melody-playing {
-            display: block;
-        }
-    }
-
     .table {
         width: 100%;
         margin-bottom: 1rem;
@@ -274,22 +261,10 @@
         transition: all 0.3s ease-in-out;
     }
 
-    .krajee-icon.krajee-icon-star {
-        margin-right: 0.25rem;
-        margin-left: 0.25rem;
-    }
-
-    .theme-krajee-svg .empty-stars .krajee-icon-star {
-        background-image: url(/static/image/empty_star.svg);
-    }
-
-    .theme-krajee-svg .filled-stars .krajee-icon-star {
-        background-image: url(/static/image/filled_star.svg);
-    }
-
     .header-table th {
         font-size: medium;
         color: var(--color-text);
+
     }
 
     .melody-number {
@@ -301,6 +276,10 @@
         font-size: medium;
     }
 
+    .melody-album {
+        font-size: medium;
+    }
+
     .body-table td {
         color: var(--color-text);
     }
@@ -309,37 +288,18 @@
         display: none;
     }
 
-    .average-col {
-        display: block;
-    }
 
-    .average-row {
-        display: block;
-    }
-
-    .submit-rating {
-        display: none;
-    }
-
-    /* Cabecera de la tabla baja cuando se hace scroll */
-    .header-table {
-        position: sticky;
-        top: 0;
-        z-index: 1;
-        background-color: var(--color-background);
-        padding: 0.5rem 0;
-    }
-
-    
     @media (max-width:768px) {
 
-        .theme-krajee-svg.rating-sm .krajee-icon {
-            width: 1.2rem;
-            height: 1.2rem;
+        .melody-number {
+            display: none;
         }
 
+        .melody-playing {
+            display: block;
+        }
 
-        .header-table th{
+        .header-table th {
             font-size: small;
         }
 
@@ -348,6 +308,10 @@
         }
 
         td.melody-title {
+            font-size: small;
+        }
+
+        td.melody-album {
             font-size: small;
         }
 
@@ -392,31 +356,10 @@
             display: block;
         }
 
-        .average-col {
-            display: none;
-        }
-
-        .average-row {
-            display: none;
-        }
-
-        .rate-col {
-            /* Centrar el texto */
-            text-align: center;
-        }
-
-        .rate-form {
-            /* Centrar el texto */
-            text-align: center;
-        }
-
-        .submit-rating {
-            display: block;
-        }
 
     }
-    
 </style>
+
 <header class="masthead-album">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div class="container position-relative px-4 px-lg-5">
@@ -428,27 +371,14 @@
                                 <i class="fa-solid fa-chevron-left"></i> Volver
                             </a>
                         </div>
-
-                        {% if user.is_superuser %}
-                        <div class="d-flex justify-content-start align-items-center">
-                            <!-- Si el usuario es administrador puede ver el formulario -->
-                            <form method="post" action="evolve/">
-                                {% csrf_token %}
-                                <!-- Otros campos del formulario -->
-                                <button type="submit" class="btn btn-primary mb-0">
-                                    Evolucionar <i class="fa-solid fa-chevron-right"></i></button>
-                            </form>
-                        </div>
-                        {% endif %}
                     </div>
                     <hr />
                     <div class="d-flex justify-content-start align-items-end">
-                        <img class="img img-fluid" src="{{ album.img.url }}" alt="Álbum {{ album.id }}"
-                            style="height: 100%;" />
+                        <img class="img img-fluid" src="/static/image/top.png" alt="playlist" style="height: 100%;" />
                         <div class="album w-100">
-                            <div class="title-album">Álbum {{ album.id }}</div>
-                            <span class="text-album mb-0">{{ melodies.0.generation }}° Generación •
-                                {{ melodies.count }} Melodías, <span class="duration-filter" style="opacity: 0.7;">{{ album.duration }}</span>
+                            <div class="title-album">Top 10</div>
+                            <span class="text-album mb-0"> Playlist •
+                                Piezas musicales más populares</span>
                         </div>
                     </div>
                 </div>
@@ -456,35 +386,32 @@
         </div>
     </div>
 </header>
-
-<div class="container playlist px-4 px-lg-5" >
+{% if melodies %}
+<div class="container playlist px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-12 col-lg-11 col-xl-10">
-
             <hr />
             <!-- Encabezado de la tabla -->
-            <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="0" >
+            <div class="table-responsive">
                 <table class="table table-hover table-borderless bg-trans">
-                    <thead class="header-table border-bottom">
-                        <tr>
+                    <thead>
+                        <tr class="header-table">
                             <th class="text-center number-col" scope="col">#</th>
                             <th class="option" scope="col"></th>
                             <th scope="col">Título</th>
-                            <th class="rate-col" scope="col">Calificar</th>
+                            <th scope="col">Álbum</th>
                             <th class="average-col" scope="col">Promedio</th>
                         </tr>
                     </thead>
-                    <tbody class="body-table">
+                    <tbody class="border-top body-table">
                         {% for melody in melodies %}
                         <tr>
-
                             <td class="align-middle text-center number-play">
                                 <button id="play-button-{{ melody.id }}" class="play-button"
                                     data-src="{{ melody.mel.url }}" data-melody-id="{{ melody.id }}"
                                     data-title="{{ melody.title  }}">
-                                    <div class="melody-number" >
+                                    <div class="melody-number">
                                         {{ forloop.counter }}
-
                                     </div>
                                     <div class="melody-playing" id="melody-playing">
                                         <i class="fas fa-play"></i>
@@ -492,31 +419,22 @@
                                 </button>
                             </td>
 
-                            <td class="align-middle melody-title" >
+                            <td class="align-middle melody-title">
                                 <span class="">
                                     {{ melody.title }}
                                 </span>
                             </td>
 
-
-                            <td class="align-middle">
-                                <form style="width: min-content;" class="rate-form" data-melody-id="{{ melody.id }}"
-                                    data-user-has-rated="{% if melody.user_has_rated %}true{% else %}false{% endif %}">
-                                    {% csrf_token %}
-                                    <div class=" d-flex align-items-center justify-content-center"
-                                        style="width: min-content;">
-                                        <input id="rating-input-{{ melody.id }}" type="number" class="rating "
-                                            name="rating" data-min="0" data-max="5" data-step="1" data-size="sm"
-                                            data-show-clear="false" data-star-titles="false" data-show-caption="false"
-                                            {% if melody.user_has_rated %} data-display-only="true" {% endif %}>
-                                        <button type="button" class="btn btn-primary submit-rating ms-3"
-                                            style="visibility: hidden;">Enviar</button>
-                                    </div>
-                                </form>
+                            <td class="align-middle melody-album">
+                                <span class="">
+                                    <!--Album al que pertenece la melodía-->
+                                    Álbum {{ melody.album.id }}
+                                </span>
                             </td>
 
                             <td class="align-middle average-row">
                                 <div class="info-rating">
+
                                     <span class="average-ratings">
                                         {{ melody.average_ratings }}
                                     </span>
@@ -538,8 +456,10 @@
                                             </span>
                                         </div>
                                     </div>
+
                                 </div>
                             </td>
+
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -549,203 +469,50 @@
         </div>
     </div>
 </div>
-</div>
+
 <div class="audio-bar">
     <audio id="audio-player" controls>
         <!-- Deja este espacio en blanco por ahora -->
     </audio>
+</div>
+{% else %}
+<div class="container">
 
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-11 col-xl-10">
+            <div class="d-flex justify-content-center align-items-center">
+                <h3 class="mt-5">
+                    {{ message }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
-<script>
-    // Pasar numero flotante a minutos
-    const durationFilter = document.querySelectorAll(".duration-filter");
-    durationFilter.forEach((filter) => {
-        const duration = parseFloat(filter.textContent);
-        const minutes = Math.floor(duration / 60);
-        const seconds = Math.floor(duration % 60);
-        filter.textContent = `cerca de ${minutes} min ${seconds} s`;
-    });
 
+<script>
     // Pasar de 0,0 a 0.0
     const averageRatings = document.querySelectorAll(".average-ratings");
-    averageRatings.forEach((rating) => {
-        const average = parseFloat(rating.textContent);
-        rating.textContent = average.toFixed(1);
-    });
+    if (averageRatings) {
+        averageRatings.forEach((rating) => {
+            const average = parseFloat(rating.textContent);
+            rating.textContent = average.toFixed(1);
+        });
+    }
 
     // Pasar de melody_2 a Melody 2 en melody-title
     const melodyTitle = document.querySelectorAll(".melody-title");
-    melodyTitle.forEach((title) => {
-        // Separar el texto por _ y convertirlo en una lista
-        const titleList = title.textContent.split("_").join(" ");
-        // Unir la lista en un string
-        title.textContent = titleList
-    });
-
+    if (melodyTitle) {
+        melodyTitle.forEach((title) => {
+            // Separar el texto por _ y convertirlo en una lista
+            const titleList = title.textContent.split("_").join(" ");
+            // Unir la lista en un string
+            title.textContent = titleList
+        });
+    }
 </script>
-<script>
-    // Función para cargar las calificaciones del usuario al cargar la página
-    function loadUserRatings() {
-        const ratingInputs = document.querySelectorAll("input.rating");
-        const userRatings = JSON.parse('{{ user_ratings|safe }}');
-
-        ratingInputs.forEach(function (input) {
-            const melodyId = input.closest(".rate-form").getAttribute("data-melody-id");
-            if (userRatings && userRatings[melodyId]) { // Si el usuario ha calificado la melodía actual
-                input.value = userRatings[melodyId];
-                const submitButton = input.closest(".rate-form").querySelector(".submit-rating");
-                if (submitButton) {
-                    submitButton.style.display = "none";
-                }
-            }
-        });
-    }
-
-    // Función para actualizar las estrellas según el valor del promedio
-    function updateStars(selecter, averageRating) {
-        const starsHTML = [];
-
-        for (let i = 1; i <= 5; i++) {
-            if (i <= averageRating) {
-                starsHTML.push('<i class="fa fa-star full"></i>');
-            } else {
-                starsHTML.push('<i class="fa fa-star empty"></i>');
-            }
-        }
-        selecter.innerHTML = starsHTML.join(" ");
-    }
-
-    // Actualiza las calificaciones del usuario
-    function updateRatingValues(form, data) {
-        // Actualiza la calificación promedio en la lista
-        const row = form.closest("tr");
-        const averageRatingSpan = row.querySelector(".average-ratings");
-
-        // Actualiza el valor de calificación promedio
-        averageRatingSpan.textContent = parseFloat(data.average_rating).toFixed(1);
-
-        // Obtiene el selector de estrellas más cercano
-        const selecter = form.closest("tr").querySelector(".starss")
-
-        // Actualiza las estrellas
-        updateStars(selecter, Math.round(parseFloat(data.average_rating).toFixed(1)));
-
-        // Actualiza el número de usuarios que calificaron la melodía
-        const userRatingSpan = form.closest("tr").querySelector(".user_rating");
-        userRatingSpan.textContent = data.users_ratings_count;
-
-        // Actualiza el valor de user_has_rated
-        form.setAttribute("data-user-has-rated", "true");
-    }
-
-    // Deshabilita el input y el botón
-    function disableInputAndButton(input, form) {
-        // Desactiva el input y actualiza las opciones después de calificar
-        $(input).rating('refresh', {
-            disabled: true,
-            displayOnly: true,
-        });
-
-        // Oculta el botón de envío
-        const submitButton = form.querySelector(".submit-rating");
-        // Ocultar el botón de envío si no hay una estrella seleccionada
-        submitButton.style.visibility = "hidden";
-    }
-
-    // Función para enviar la calificación al servidor
-    function sendRating(melodyId, ratingValue, form, input) {
-        // Crea un objeto FormData para enviar los datos de calificación a la vista de Django
-        const formData = new FormData(form);
-        // Agrega el valor de calificación al objeto FormData
-        formData.append("ratings", ratingValue)
-
-        // Envía la calificación a la vista de Django
-        fetch(`evaluate/${melodyId}/`, {
-            method: "POST",
-            // Agrega el token CSRF en el encabezado de la solicitud para evitar el error 403 de CSRF 
-            headers: { "X-CSRFToken": "{{ csrf_token }}" },
-            // Agrega los datos de calificación al cuerpo de la solicitud
-            body: formData,
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-
-                    // Actualiza las calificaciones del usuario
-                    updateRatingValues(form, data);
-
-                    // Deshabilita el input y el botón
-                    disableInputAndButton(input, form);
-
-                } else {
-                    // Muestra un mensaje de error si la calificación falla
-                    alert("Ocurrió un error al evaluar la música: " + data.error_message);
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                alert("Ocurrió un error al evaluar la música.");
-            });
-    }
-
-    // Agrega este código JavaScript para manejar las calificaciones de forma asíncrona
-    document.addEventListener("DOMContentLoaded", function () {
-        // Carga las calificaciones del usuario
-        loadUserRatings();
-
-        // Selecciona los inputs de calificación
-        const ratingInputs = document.querySelectorAll("input.rating");
-        // Verifica si la pantalla es pequeña o no
-        isSmallScreen = window.matchMedia("(max-width: 768px)").matches;
-
-        // Agrega un evento de clic a cada input de calificación
-        ratingInputs.forEach(function (input) {
-
-            // Obtiene el formulario más cercano
-            const form = input.closest(".rate-form");
-            // Obtiene el id de la melodía
-            const melodyId = form.getAttribute("data-melody-id");
-
-            // Si la pantalla es pequeña, agrega un evento de clic al botón de envío
-            if (isSmallScreen) {
-
-                // Agrega un evento de clic al input de calificación
-                $(input).on('rating:change', function (event, value) {
-                    // Deshabilita el oyente de eventos para evitar múltiples envíos de solicitudes POST
-                    $(input).off('rating:change');
-                    const ratingValue = input.value || '0';
-                    if (ratingValue > 0) {
-                        // Muestra el botón de envío
-                        const submitButton = form.querySelector(".submit-rating");
-                        // Mostrar el botón de envío
-                        submitButton.style.visibility = "visible";
-
-                        submitButton.addEventListener('click', function () {
-                            const ratingValue = input.value || '0';
-                            // Deshabilita el botón de envío
-                            submitButton.disabled = true;
-                            // Envía la calificación al servidor
-                            sendRating(melodyId, ratingValue, form, input);
-                        });
-                    }
-                });
-            }
-            // Si la pantalla no es pequeña, agrega un evento de cambio al input de calificación
-            else {
-                // Agrega un evento de cambio al input de calificación
-                $(input).on('rating:change', function (event, value) {
-                    // Deshabilita el oyente de eventos para evitar múltiples envíos de solicitudes POST
-                    $(input).off('rating:change');
-                    const ratingValue = value || '0';
-                    // Envía la calificación al servidor
-                    sendRating(melodyId, ratingValue, form, input);
-                });
-            }
-        });
-    });
-</script>
-
+<!-- Maneja los colores de fondo del encabezado -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const colorThief = new ColorThief();
@@ -782,6 +549,7 @@
 
 </script>
 
+<!-- Maneja la reproducción de la melodía -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
 

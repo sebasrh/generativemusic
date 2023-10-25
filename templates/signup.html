@@ -223,7 +223,7 @@
         top: 120%;
         left: 50%;
         transform: translateX(-50%);
-        width: 90%;
+        width: 60%;
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
         color: var(--color-text);
@@ -256,7 +256,7 @@
         top: 120%;
         left: 50%;
         transform: translateX(-50%);
-        width: 90%;
+        width: 60%;
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
         color: var(--color-text);
@@ -308,7 +308,7 @@
 
                         <div class="form-row mb-4 position-relative">
                             <input type="text" class="form-control user-form" name="username" id="username"
-                                placeholder="Nombre de usuario" maxlength="20">
+                                placeholder="Nombre de usuario" maxlength="20" autocomplete="off">
                             <i class="fas fa-user"
                                 style="position: absolute; top: 35%; right: 20px; color: rgba(255, 255, 255, 0.8);"></i>
 
@@ -425,7 +425,7 @@
         } else {
             document.getElementById("user-feedback").style.display = "block";
         }
-        if (username !== "" && username.length >= 4) {
+        if (username.length >= 4) {
             // Realiza una solicitud AJAX al servidor para verificar el nombre de usuario
             $.ajax({
                 url: 'check_username_availability/',

@@ -93,41 +93,65 @@
         <div class="col-md-12 col-lg-10 col-xl-9">
             <div class="mt-5">
                 <h2 id="saludo" class="mt-0">Bienvenido</h2>
-
                 <p>
-                    En esta sección, encontrarás los álbumes generados por el Algoritmo Genético. Periódicamente, se
-                    generan nuevas piezas musicales y se añaden a los álbumes.
+                    En esta sección, encontrarás el <strong>top 10</strong> de las mejores piezas musicales y los
+                    <strong>álbumes</strong> <span class="fst-italic">(poblaciones)</span> generados por el algoritmo
+                    genético. Periódicamente, se generan nuevas
+                    piezas musicales y se añaden a los álbumes.
                 </p>
                 <!-- Si el usuario es administrador puede ver el formulario -->
                 {% if user.is_superuser %}
                 <hr />
-                <div class="d-flex justify-content-start align-items-center">
+                <div class="d-flex justify-content-end align-items-center">
                     <form method="post">
                         {% csrf_token %}
+
                         <!-- Otros campos del formulario -->
-                        <button type="submit" class="btn btn-primary">Generar Álbum <i
+                        <button type="submit" class="btn btn-primary ">Generar Álbum <i
                                 class="fa-solid fa-chevron-right"></i></button>
+
                     </form>
                 </div>
-
                 {% endif %}
-                <hr />
-                <h3>Álbumes</h3>
             </div>
+            {% if albums %}
+            <hr />
+            <h3>Top 10</h3>
+            <div class="row justify-content-start">
+                <div class="col-4 col-md-4 col-lg-4 col-xl-3 content-cards">
+
+                    <div class="card clickable card-container" id="playlist" data-href="top/">
+                        <div id="album" class="card-body">
+
+                            <img src="/static/image/top.png" alt="playlist" />
+
+                            <div class="card-title">Playlist</div>
+                            <div class="card-text mb-2">
+                                Las 10 mejores piezas musicales
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <hr />
+            <h3>Álbumes</h3>
+            
             <div class="row justify-content-start">
                 {% for album in albums %}
                 <div class="col-4 col-md-4 col-lg-4 col-xl-3 content-cards">
-
                     <div class="card clickable card-container" id="album" data-href="generations/{{ album.id }}/">
                         {% if user.is_superuser %}
                         <div class="card-header">
                             <div class="d-flex justify-content-end">
-                                <a href="upload/{{ album.id }}/" class="btn btn-info btn-sm" style="margin-right: 0.5rem;">
+                                <a href="upload/{{ album.id }}/" class="btn btn-info btn-sm"
+                                    style="margin-right: 0.5rem;">
                                     <i class="fa-solid fa-edit" style="color: white;"></i>
                                 </a>
                                 <form action="delete/{{ album.id }}/" method="post">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmDelete()">
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirmDelete()">
                                         <i class="fa-solid fa-trash" style="color: white;"></i>
                                     </button>
                                 </form>
@@ -140,13 +164,14 @@
 
                             <div class="card-title">Álbum {{ album.id }}</div>
 
-                            <div class="card-text">
-                                {{ album.melodies.first.album }} Generación
+                            <div class="card-text generation-filter">
+                                {{ album.melodies.first.generation }}° Generación
                             </div>
-                            <div class="card-text mb-2">
-                                Duración: {{ album.duration }}
+                            <div class="card-text mb-2 duration-filter">
+                                <!-- Pasar numero flotante a minutos -->
+                                {{ album.duration }}
                             </div>
-                            <div class="card-created">{{ album.created_at }}</div>
+                            <div class="card-created">{{ album.created_at|date:"P • F j, Y" }}</div>
                         </div>
                     </div>
 
@@ -154,9 +179,26 @@
                 {% endfor %}
             </div>
             <hr />
+            {% else %}
+            <hr />
+            <h3>No hay Top 10</h3>
+            <hr />
+            <h3>No hay álbumes</h3>
+            {% endif %}
         </div>
     </div>
 </div>
+<script>
+    // Pasar numero flotante a minutos
+    const durationFilter = document.querySelectorAll(".duration-filter");
+    durationFilter.forEach((filter) => {
+        const duration = parseFloat(filter.textContent);
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60);
+        filter.textContent = `${minutes} min ${seconds} s`;
+    });
+
+</script>
 <!-- alerta de confirmacion -->
 <script>
     function confirmDelete() {
@@ -181,20 +223,6 @@
             saludo.textContent = "Buenas noches";
         }
 
-        const cards = document.querySelectorAll(".clickable");
-        cards.forEach((card) => {
-            card.addEventListener("click", function () {
-                const href = card.getAttribute("data-href");
-                if (href) {
-                    window.location.href = href;
-                }
-            });
-        });
-    });
-</script>
-<script>
-
-    document.addEventListener("DOMContentLoaded", function () {
         const cards = document.querySelectorAll(".clickable");
         cards.forEach((card) => {
             card.addEventListener("click", function () {

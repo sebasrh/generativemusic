@@ -157,7 +157,7 @@ class representation:
         # Ruta del soundfont a utilizar 
         soundfont_path = "algorithm/Chorium/Chorium_fork.sf2"
 
-        # Convierte el archivo MIDI en un archivo WAV y MP3
+        # Convierte el archivo MIDI en un archivo MP3
         mp3, final_duration = convert_midi_to_mp3(midi, soundfont_path)
         
         # Sube el archivo MP3 a Cloudinary
@@ -175,6 +175,10 @@ class representation:
         # Guarda la melodía en la base de datos
         mel.save()
         album.melodies.add(mel)
+
+        # Remueve los archivos temporales
+        os.remove(midi)
+        os.remove(mp3)
 
 # Clase Note
 class Note:

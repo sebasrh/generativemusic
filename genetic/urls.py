@@ -12,5 +12,7 @@ urlpatterns = [
 
      path('delete/<int:album_id>/', views.delete_genetic, name='delete_genetic'),
 
-     path('upload/<int:album_id>/', views.uploadAlbumCover, name='uploadAlbumCover')
+     path('upload/<int:album_id>/', views.uploadAlbumCover, name='uploadAlbumCover'),
+
+     path('top/', views.top_rated, name="top"),
 ]
