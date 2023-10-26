@@ -76,8 +76,11 @@
     .list-group-item {
         background-color: transparent;
         border: none;
-        padding: 1rem 1rem;
         color: var(--color-text);
+    }
+
+    .list-group {
+        margin-bottom: 1rem;
     }
 
     .ml {
@@ -271,6 +274,70 @@
         }
     }
 </style>
+<style>
+    .accordion-item {
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: none;
+        margin-bottom: 1rem;
+    }
+
+    .accordion-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .accordion-body {
+        padding: 1rem 1.25rem;
+        box-shadow: 0 0 0 0.15rem var(--color-card-border);
+        border-radius: 0 0 0.25rem 0.25rem;
+        /* posiciones: arriba derecha abajo izquierda */
+    }
+
+    .accordion-button {
+        color: var(--color-background);
+        background-color: var(--color-navigation-bar);
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+            border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        border: none;
+        border-radius: 0.25rem;
+        /* Quitar box shadow */
+        box-shadow: none;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+    }
+
+    .accordion-button:hover {
+        background-color: var(--color-background);
+        color: var(--color-text);
+    }
+
+    .accordion-button:focus {
+        box-shadow: 0 0 0 0.15rem var(--color-card-border);
+        border: none;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #333;
+        background-color: var(--color-background);
+        box-shadow: 0 0 0 0.15rem var(--color-card-border);
+    }
+
+    .accordion-button::after {
+        transform: rotate(90deg);
+        transition: transform 0.2s ease-in-out;
+        background-image: url(/static/image/accordion.svg);
+    }
+
+    /* Boton hover */
+    .accordion-button:hover::after {
+        background-image: url(/static/image/accordion-active.svg);
+    }
+
+    .accordion-button:not(.collapsed)::after {
+        transform: rotate(0deg);
+        background-image: url(/static/image/accordion-active.svg);
+    }
+</style>
 
 
 <!-- Masthead -->
@@ -309,22 +376,22 @@
             <!-- Post preview -->
             <div>
                 <h2>Investigación</h2>
-                <p class="mb-2">
+                <p>
                     Tras realizar la investigación pertinente, se determinó que las técnicas que mejor se adaptan a los
                     objetivos de este proyecto son:
                 </p>
 
-                <div class="accordion" id="techniquesAccordion">
+                <div class="accordion " id="techniquesAccordion">
                     <!-- Algoritmos Genéticos -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="geneticHeading">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#geneticCollapse" aria-expanded="false" aria-controls="geneticCollapse">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#geneticCollapse" aria-expanded="true" aria-controls="geneticCollapse">
                                 Algoritmos Genéticos <span class="fst-italic">(AG)</span>
                             </button>
                         </h2>
-                        <div id="geneticCollapse" class="accordion-collapse collapse"
-                            aria-labelledby="geneticHeading">
+                        <div id="geneticCollapse" class="accordion-collapse collapse" aria-labelledby="geneticHeading"
+                            data-bs-parent="#techniquesAccordion">
                             <div class="accordion-body">
                                 <h2>Algoritmos Genéticos</h2>
                                 <p>
@@ -459,7 +526,7 @@
                                     </div>
                                 </div>
 
-                                <div class="d-flex justify-content-end align-items-center  mt-5 mb-5">
+                                <div class="d-flex justify-content-end align-items-center mt-3 mb-4">
                                     <a class="btn btn-primary " id="btn" href="/genetic">
                                         Ir a Calificar <i class="fa-solid fa-chevron-right"></i>
                                     </a>
@@ -471,7 +538,7 @@
                     <!-- Redes Neuronales Recurrentes -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="rnnHeading">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#rnnCollapse" aria-expanded="false" aria-controls="rnnCollapse">
                                 Redes Neuronales Recurrentes <span class="fst-italic">(RNR)</span>
                             </button>
@@ -497,7 +564,7 @@
                                     <!-- Se crea un corpus de sonidos -->
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
                                         <div class="ms-3 me-auto">
-                                            Se crea un corpus de sonidos <span class="fst-italic">(conjunto de
+                                            Se crea/obtiene un corpus de sonidos <span class="fst-italic">(conjunto de
                                                 piezas musicales)</span>.
                                         </div>
                                     </li>
@@ -523,8 +590,8 @@
                                         </div>
                                     </li>
                                 </ol>
-                                <div class="d-flex justify-content-end align-items-center mt-5 mb-5">
-                                    <a class="btn btn-primary " id="btn" href="/lstm">
+                                <div class="d-flex justify-content-end align-items-center mt-3 mb-4">
+                                    <a class="btn btn-primary " id="btn" href="/rnn">
                                         Ir a Componer <i class="fa-solid fa-chevron-right"></i>
                                     </a>
                                 </div>
@@ -537,13 +604,16 @@
             <hr />
             <!-- Post preview -->
             <div>
-                <h2>Agradecimiento</h2>
+                <h2>Encuesta</h2>
                 <p>
-                    Agradezco sinceramente su interés y contribución a este proyecto.
+                    Una vez hayas explorado ambas técnicas, te invito a que respondas una encuesta que me ayudará a
+                    llevar a cabo el análisis comparativo.
                 </p>
-                <p>
-                    ¡Gracias!🙏
-                </p>
+                <div class="d-flex justify-content-end align-items-center">
+                    <a class="btn btn-primary " id="btn" href="https://view.forms.app/sebastianrengifohidalgo/encuesta-tecnicas-de-musica-generativa" target="_blank">
+                        Ir a Encuesta <i class="fa-solid fa-chevron-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

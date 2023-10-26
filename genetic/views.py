@@ -168,8 +168,7 @@ def uploadAlbumCover(request, album_id):
         # Obtener el formulario
         form = AlbumImageForm(instance=album)
 
-        return render(request, 'uploadAlbumCover.html', {'form': form, 'user': user})
-
+        return render(request, 'uploadAlbumCover.html', {'form': form, 'album': album})
     else:
         # Si el usuario no es superusuario, redirigir a la página de inicio
         return redirect('index')
@@ -339,10 +338,12 @@ def top_rated(request):
             melodies += album.melodies.all()
 
         # Obtener las melodías calificadas
-        top_rated_melodies = [mel for mel in melodies if mel.average_ratings > 0.0]
+        top_rated_melodies = [
+            mel for mel in melodies if mel.average_ratings > 0.0]
 
         # Ordenar las melodías por calificación promedio y número de calificaciones
-        top_rated_melodies.sort(key=lambda x: (x.average_ratings, x.user_rating.all().count()), reverse=True)
+        top_rated_melodies.sort(key=lambda x: (
+            x.average_ratings, x.user_rating.all().count()), reverse=True)
 
         # Obtener las 10 mejores melodías
         top_rated_melodies = top_rated_melodies[:10]
@@ -350,9 +351,9 @@ def top_rated(request):
         # Obtener el álbum de cada melodía
         for melody in top_rated_melodies:
             melody.album = melody.album_set.first()
-            
+
         # Si no hay melodías, mostrar un mensaje
         if not top_rated_melodies:
-            return render(request, 'top_rated.html', {'message': 'No hay melodías calificadas'})
+            return render(request, 'top_rated.html', {'message': 'No hay piezas calificadas'})
 
         return render(request, 'top_rated.html', {'melodies': top_rated_melodies})

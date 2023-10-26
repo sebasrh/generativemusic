@@ -452,10 +452,25 @@
                     <span class="link_name">Home</span>
                     </a>
                 </li>
-                <li class="{% if request.path == '/genetic/' %}active{% endif %}"">
+                <li class="{% if request.path == '/genetic/' %}active{% endif %}">
                     <a href=" /genetic" class="text-decoration-none px-3 py-2 d-block">
                     <i class="fas fa-dna me-2"></i>
                     <span class="link_name">Genético</span>
+                    </a>
+                </li>
+
+                <li class="{% if request.path == '/rnn/' %}active{% endif %}">
+                    <a href=" /rnn" class="text-decoration-none px-3 py-2 d-block">
+                    <i class="fas fa-brain me-2"></i>
+                    <span class="link_name">Red Neuronal</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://view.forms.app/sebastianrengifohidalgo/encuesta-tecnicas-de-musica-generativa" target="_blank" 
+                    class="text-decoration-none px-3 py-2 d-block">
+                    <i class="fas fa-poll me-2"></i>
+                    <span class="link_name">Encuesta</span>
                     </a>
                 </li>
             </ul>

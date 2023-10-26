@@ -57,10 +57,10 @@ def main():
     lambda_ = 18 # 90% de la población inicial
 
     # Probabilidad de descendencia por cruce (0-1)
-    cxpb = 0.8
+    cxpb = 0.8 # 80%
 
     # Probabilidad de descendencia por mutación (0-1)
-    mutpb = 0.1
+    mutpb = 0.1 # 10% 
 
     # Crear objetos y argumentos
     alg_model = GeneticAlgorithmInfo(

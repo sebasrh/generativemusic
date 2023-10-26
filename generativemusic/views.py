@@ -12,3 +12,5 @@ def page_not_found(request, exception):
 
 def server_error(request, exception):
     return render(request, '500.html', status=500, context={'exception': exception})
+
+# Crear una app: python manage.py startapp <nombre_app>

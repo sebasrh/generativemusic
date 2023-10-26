@@ -30,7 +30,7 @@
         font-size: 0.55rem;
     }
 
-    .card.clickable {
+    .card{
         border-radius: 8px;
         background-color: var(--color-card);
         cursor: pointer;
@@ -42,7 +42,7 @@
         box-shadow: 0 0 0 0.1rem var(--color-card-border);
     }
 
-    .card.clickable:hover {
+    .card:hover {
         background-color: var(--color-card);
         box-shadow: 0 0 0 0.2rem var(--color-card-border);
         transition: all 0.3s ease;
@@ -120,8 +120,8 @@
             <div class="row justify-content-start">
                 <div class="col-4 col-md-4 col-lg-4 col-xl-3 content-cards">
 
-                    <div class="card clickable card-container" id="playlist" data-href="top/">
-                        <div id="album" class="card-body">
+                    <div class="card  card-container" id="playlist" >
+                        <div id="album" class="card-body clickable" data-href="top/">
 
                             <img src="/static/image/top.png" alt="playlist" />
 
@@ -136,11 +136,10 @@
             </div>
             <hr />
             <h3>Álbumes</h3>
-            
             <div class="row justify-content-start">
                 {% for album in albums %}
                 <div class="col-4 col-md-4 col-lg-4 col-xl-3 content-cards">
-                    <div class="card clickable card-container" id="album" data-href="generations/{{ album.id }}/">
+                    <div class="card card-container" id="album">
                         {% if user.is_superuser %}
                         <div class="card-header">
                             <div class="d-flex justify-content-end">
@@ -156,9 +155,11 @@
                                     </button>
                                 </form>
                             </div>
+
                         </div>
+
                         {% endif %}
-                        <div id="album" class="card-body">
+                        <div id="album" class="card-body clickable" data-href="generations/{{ album.id }}/">
 
                             <img src="{{ album.img.url }}" alt="Álbum {{ album.id }}" />
 
