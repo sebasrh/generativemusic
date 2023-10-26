@@ -4,6 +4,9 @@ set -o errexit
 
 #poetry install
 pip install --upgrade pip
+pip install tensorflow
+pip install keras
+pip install music21
 pip install -r requirements.txt 
 
 python manage.py collectstatic --no-input
