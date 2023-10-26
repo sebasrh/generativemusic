@@ -30,7 +30,7 @@
         font-size: 0.55rem;
     }
 
-    .card{
+    .card {
         border-radius: 8px;
         background-color: var(--color-card);
         cursor: pointer;
@@ -95,9 +95,8 @@
                 <h2 id="saludo" class="mt-0">Bienvenido</h2>
                 <p>
                     En esta sección, encontrarás el <strong>top 10</strong> de las mejores piezas musicales y los
-                    <strong>álbumes</strong> <span class="fst-italic">(poblaciones)</span> generados por el algoritmo
-                    genético. Periódicamente, se generan nuevas
-                    piezas musicales y se añaden a los álbumes.
+                    <strong>álbumes</strong> generados por el algoritmo
+                    genético. Periódicamente, se generan nuevas piezas musicales y se añaden a los álbumes.
                 </p>
                 <!-- Si el usuario es administrador puede ver el formulario -->
                 {% if user.is_superuser %}
@@ -120,7 +119,7 @@
             <div class="row justify-content-start">
                 <div class="col-4 col-md-4 col-lg-4 col-xl-3 content-cards">
 
-                    <div class="card  card-container" id="playlist" >
+                    <div class="card  card-container" id="playlist">
                         <div id="album" class="card-body clickable" data-href="top/">
 
                             <img src="/static/image/top.png" alt="playlist" />

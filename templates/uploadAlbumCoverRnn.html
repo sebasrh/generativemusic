@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    hr {
+        border: 0;
+        opacity: 1;
+        margin: 1.5rem 0;
+    }
+    
+</style>
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-12 col-lg-10 col-xl-9">
+            <div class="mt-5">
+                <div class="d-flex justify-content-start align-items-center ">
+                    <a class="btn btn-primary " id="btn" href="/rnn">
+                        <i class="fa-solid fa-chevron-left"></i> Volver
+                    </a>
+                </div>
+                <hr />
+                <!-- Formulario para subir una imagen -->
+                <h2>Subir Imagen del Álbum</h2>
+                <form method="post" enctype="multipart/form-data" class="form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.img.id_for_label }}">Selecciona una imagen para la portada del
+                            álbum:</label>
+                        <div class="custom-file mb-3 mt-3">
+                            {{ form.img }}
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-start align-items-center">
+
+                        <button type="submit" class="btn btn-primary">Subir Imagen</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

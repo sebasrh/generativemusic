@@ -14,7 +14,7 @@ scales_sig = ["major", "minor"]
 
 bpm = [60, 70, 80, 90, 100, 110, 120, 130, 140, 160]
 
-aos = ['True', 'False']
+aos = [True, False]
 
 def main():
     """
@@ -26,7 +26,7 @@ def main():
 
     tempo = random.choice(bpm)
 
-    back_track = 'True'
+    back_track = True
     
     arp_or_scale = random.choice(aos)
         

@@ -1,0 +1,692 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css">
+<script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
+
+<style>
+    hr {
+        border: 0;
+        opacity: 1;
+        margin: 1.5rem 0;
+    }
+
+    .play-button {
+        height: 2.5rem;
+        /* Tamaño del botón */
+        width: 2.5rem;
+        /* Tamaño del botón */
+        background-color: transparent;
+        /* Color azul similar al de Spotify */
+        border: none;
+        /* Elimina el borde del botón */
+        cursor: pointer;
+        /* Cambia el cursor al pasar el mouse */
+        transition: color 0.3s ease-in-out;
+        /* Agrega una transición suave */
+        border-radius: 50%;
+        /* Hace que el botón sea redondo */
+        font-size: 1.5rem;
+        /* Aumenta el tamaño del icono */
+        padding: 0;
+        /* Elimina el relleno del botón */
+        outline: none;
+        /* Elimina el borde al hacer clic en el botón */
+        transform: scale(1);
+        /* Aumenta el tamaño del botón */
+    }
+
+    .play-button:hover {
+        transition: color 0.3s ease-in-out;
+        /* Agrega una transición suave */
+        transform: scale(1.1);
+        /* Aumenta el tamaño del botón */
+    }
+
+    #btnPrev,
+    #btnNext,
+    #btnPlay {
+        /* Cambia el cursor al pasar el mouse */
+        border: none;
+        /* Elimina el borde del botón */
+        outline: none;
+        height: 38.4px;
+        width: 38.4px;
+        /* Elimina el borde al hacer clic en el botón */
+        transform: scale(1);
+        /* Aumenta el tamaño del botón */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+
+        /* Margen en el eje x */
+        margin: 0 0.5rem;
+
+        /* Color azul similar al de Spotify */
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    #btnPlay {
+        background-color: var(--color-background);
+    }
+
+    #btnPlay i {
+        color: var(--color-button-hover);
+    }
+
+    #btnPlay:hover {
+        transform: scale(1.1);
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    #btnPrev:hover,
+    #btnNext:hover {
+        transform: scale(1.1);
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .plyr {
+        --plyr-color-main: var(--color-control);
+        /* Cambia el color principal a verde Spotify */
+        --plyr-control-icon-size: 16px;
+        /* Aumenta el tamaño de los iconos */
+        --plyr-control-spacing: 1rem;
+        /* Reduce el espacio entre los controles */
+        --plyr-audio-controls-background: var(--color-control);
+        /* Cambia el color de fondo de los controles */
+        --plyr-audio-control-color: var(--color-background);
+        /* Cambia el color de los controles de audio */
+        --plyr-range-thumb-height: 12px;
+        /* Ajusta la altura del control deslizante */
+        --plyr-range-thumb-background: var(--color-background);
+        /* Cambia el color del control deslizante */
+        --plyr-range-thumb-active-shadow-width: 8px;
+        /* Elimina la sombra activa del control deslizante */
+        --plyr-range-track-height: 4px;
+        /* Reduce la altura de la barra de progreso */
+        --plyr-range-fill-background: var(--color-background);
+        /* Cambia el color de la barra de progreso */
+        --plyr-tooltip-background: var(--color-button-hover);
+        /* Cambia el color de fondo del tooltip */
+        --plyr-tooltip-color: var(--color-background);
+        /* Cambia el color del texto del tooltip */
+        --plyr-tooltip-padding: 8px;
+        /* Ajusta el relleno del tooltip */
+        --plyr-tooltip-arrow-size: 0;
+        /* Elimina la flecha del tooltip */
+        --plyr-tooltip-radius: 4px;
+        /* Ajusta el radio del tooltip */
+        --plyr-tooltip-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+        /* Elimina la sombra del tooltip */
+        --plyr-font-size-time: 0.75rem;
+        /* Tamaño de la fuente para el tiempo */
+        --plyr-font-weight-regular: 500;
+        /* Ajusta el grosor de la fuente regular */
+    }
+
+    /* Estilo personalizado para el botón de reproducción Plyr */
+    button.plyr__control[data-plyr="mute"] {
+        cursor: default;
+        color: var(--color-background);
+        transform: scale(1);
+        /* Color verde similar al de Spotify */
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    /* Estilo al pasar el mouse sobre el botón de reproducción Plyr */
+    button.plyr__control[data-plyr="mute"]:hover {
+        transform: scale(1.1);
+        background-color: transparent;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .plyr__controls {
+        display: block;
+    }
+
+    .audio-bar {
+        position: sticky;
+        z-index: 2;
+        bottom: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Inicialmente, oculta el icono de reproducción */
+    .melody-playing {
+        display: none;
+        color: var(--color-button);
+    }
+
+    /* Inicialmente, muestra el número de melodía */
+    .melody-number {
+        display: block;
+        font-size: medium;
+        font-weight: bold;
+    }
+
+    /* Cuando se realiza hover en la fila de la tabla, muestra el icono de reproducción */
+    tr:hover .melody-number {
+        display: none;
+    }
+
+    tr:hover .melody-playing {
+        display: block;
+    }
+
+    /* Cuando la tabla está activa, muestra el icono de reproducción */
+    tr.table-active .melody-number {
+        display: none;
+    }
+
+    tr.table-active .melody-playing {
+        display: block;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        vertical-align: top;
+        --bs-table-bg: transparent;
+        --bs-table-active-bg: #88a7d040;
+        --bs-table-hover-bg: #88a7d018;
+    }
+
+    header.masthead-album .album {
+        color: var(--color-background);
+        margin-left: 2rem;
+    }
+
+    header.masthead-album {
+        padding-top: 3rem;
+        padding-bottom: 1rem;
+        background: no-repeat center center;
+
+        background-size: cover;
+        background-attachment: scroll;
+        /* Sombra abajo del header */
+
+    }
+
+    header.masthead-album .album .title-album {
+        font-size: 5rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+    }
+
+    header.masthead-album .album .text-album {
+        font-size: 1rem;
+        font-weight: 300;
+    }
+
+    .img {
+        width: 250px;
+        height: 250px;
+        /* Esto permite que la imagen conserve su proporción */
+        object-fit: cover;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+
+        transition: all 0.3s ease-in-out;
+    }
+
+    .header-table th {
+        font-size: medium;
+        color: var(--color-text);
+
+    }
+
+    .melody-number {
+        font-size: medium;
+        color: var(--color-text)
+    }
+
+    .melody-title {
+        font-size: medium;
+    }
+
+    .melody-album {
+        font-size: medium;
+    }
+
+    .body-table td {
+        color: var(--color-text);
+    }
+
+    .option {
+        display: none;
+    }
+
+
+    @media (max-width:768px) {
+
+        .melody-number {
+            display: none;
+        }
+
+        .melody-playing {
+            display: block;
+        }
+
+        .header-table th {
+            font-size: small;
+        }
+
+        .melody-number {
+            font-size: small;
+        }
+
+        td.melody-title {
+            font-size: small;
+        }
+
+        td.melody-album {
+            font-size: small;
+        }
+
+        .img {
+            width: 160px;
+            height: 160px;
+
+            transition: all 0.3s ease-in-out;
+        }
+
+        header.masthead-album .album .title-album {
+            font-size: 3rem;
+            margin-bottom: 0;
+        }
+
+        header.masthead-album .album .text-album {
+            font-size: 0.875rem;
+        }
+
+        .volume,
+        .mute {
+            display: none;
+        }
+
+        .number-col {
+            display: none;
+        }
+
+        .option {
+            display: block;
+        }
+
+
+    }
+</style>
+
+<header class="masthead-album">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-12 col-lg-11 col-xl-10">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-start align-items-center ">
+                            <a class="btn btn-primary " id="btn" href="/rnn">
+                                <i class="fa-solid fa-chevron-left"></i> Volver
+                            </a>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-start align-items-end">
+                        <img class="img img-fluid" src="{{ album.img.url }}" alt="Álbum {{ album.id }}"
+                            style="height: 100%;" />
+                        <div class="album w-100">
+                            <div class="title-album">Álbum {{ album.id }}</div>
+                            <span class="text-album mb-0">Playlist •
+                                {{ melodies.count }} Melodías, <span class="duration-filter" style="opacity: 0.7;">{{ album.duration }}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container playlist px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-12 col-lg-11 col-xl-10">
+            <hr />
+            <!-- Encabezado de la tabla -->
+            <div class="table-responsive">
+                <table class="table table-hover table-borderless bg-trans">
+                    <thead>
+                        <tr class="header-table">
+                            <th class="text-center number-col" scope="col">#</th>
+                            <th class="option" scope="col"></th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Tonalidad</th>
+                            <th scope="col">Tempo</th>
+                            <th scope="col">Compás</th>
+                        </tr>
+                    </thead>
+                    <tbody class="border-top body-table">
+                        {% for melody in melodies %}
+                        <tr>
+                            <td class="align-middle text-center number-play ">
+                                <button id="play-button-{{ melody.id }}" class="play-button"
+                                    data-src="{{ melody.mel.url }}" data-melody-id="{{ melody.id }}"
+                                    data-title="{{ melody.title  }}">
+                                    <div class="melody-number">
+                                        {{ forloop.counter }}
+                                    </div>
+                                    <div class="melody-playing" id="melody-playing">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </button>
+                            </td>
+
+                            <td class="align-middle melody-title">
+                                <span class="">
+                                    {{ melody.title }}
+                                </span>
+                            </td>
+
+                            <td class="align-middle melody-album">
+                                <span class="">
+                                    {{ melody.key }}
+                                </span>
+                            </td>
+
+                            <td class="align-middle melody-album">
+                                <span class="">
+                                    {{ melody.tempo }}
+                                </span>
+                            </td>
+
+                            <td class="align-middle melody-album">
+                                <span class="">
+                                    {{ melody.meter }}
+                                </span>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <hr />
+        </div>
+    </div>
+</div>
+
+<div class="audio-bar">
+    <audio id="audio-player" controls>
+        <!-- Deja este espacio en blanco por ahora -->
+    </audio>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+
+<script>
+    const durationFilter = document.querySelectorAll(".duration-filter");
+    durationFilter.forEach((filter) => {
+        const duration = parseFloat(filter.textContent);
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60);
+        filter.textContent = `cerca de ${minutes} min ${seconds} s`;
+    });
+</script>
+<!-- Maneja los colores de fondo del encabezado -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const colorThief = new ColorThief();
+        const img = document.querySelector('.img');
+        img.setAttribute('crossorigin', 'anonymous');
+
+
+        img.addEventListener('load', function () {
+            const dominantColor = colorThief.getColor(img);
+
+            console.log(dominantColor);
+
+            for (let i = 0; i < 3; i++) {
+                if (dominantColor[i] > 150) {
+                    dominantColor[i] = dominantColor[i] - 100;
+                }
+            }
+
+            const color1 = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+            const color2 = `rgb(87, 189, 158)`;
+
+            // Convierte el color RGB en formato CSS.
+            const backgroundColorAlbum = `linear-gradient(to top, ${color1} , ${color2}) `;
+
+            const header = document.querySelector('.masthead-album');
+            header.style.background = backgroundColorAlbum;
+
+            // Agrega la sombra con un color específico
+            const shadowColor = `rgba(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]},0.5)`;
+            header.style.boxShadow = `0 1.5rem 2rem ${shadowColor}`;
+        });
+
+    });
+
+</script>
+
+<!-- Maneja la reproducción de la melodía -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const controls = `
+        <div class="plyr__controls py-2">
+
+            <div class="d-flex align-items-center">
+
+                <div class="col-3 col-md-2">
+                    <div class="d-flex justify-content-start align-items-center">
+                        <div class="mel ">
+                            <!-- Contenido de la melodía -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-8">
+                    <div class="d-flex justify-content-center align-items-center my-1">
+                        <div id="btnPrev" class="">
+                            <i class="fas fa-step-backward"></i>
+                        </div>
+                        <div id="btnPlay" class="">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div id="btnNext" class=" ">
+                            <i class="fas fa-step-forward"></i>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="plyr__time plyr__time--current mx-4" aria-label="Current time">00:00</div>
+                        <div class="plyr__progress w-100">
+                            <input data-plyr="seek" type="range" min="0" max="100" step="0.01" value="0" aria-label="Seek">
+                            <progress class="plyr__progress__buffer" min="0" max="100" value="0">% buffered</progress>
+                            <span role="tooltip" class="plyr__tooltip">00:00</span>
+                        </div>
+                        <div class="plyr__time plyr__time--duration mx-4" aria-label="Duration">00:00</div>
+                    </div>
+                </div>
+
+                <div class="col-3 col-md-2">
+                    <div class="d-flex justify-content-end align-items-center">
+                        <button type="button" class="plyr__control" aria-label="Mute" data-plyr="mute">
+                            <svg class="icon--pressed" role="presentation"><use xlink:href="#plyr-muted"></use></svg>
+                            <svg class="icon--not-pressed" role="presentation"><use xlink:href="#plyr-volume"></use></svg>
+                            <span class="label--pressed plyr__tooltip" role="tooltip">Desactivar silenciar</span>
+                            <span class="label--not-pressed plyr__tooltip" role="tooltip">Silenciar</span>
+                        </button>
+
+                        <div class="plyr__volume ">
+                            <input data-plyr="volume" type="range" min="0" max="1" step="0.05" value="1" autocomplete="off" aria-label="Volume">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        `;
+        // Setup the player
+        const player = new Plyr('#audio-player', { controls });
+
+        const audioPlayer = player.media;
+        const playButtons = document.querySelectorAll('.play-button');
+        // Muestra el titulo de la melodía
+        document.querySelector('.mel').innerHTML = playButtons[0].getAttribute('data-title');
+
+        document.getElementById('btnPlay').addEventListener('click', function () {
+            // Si la melodía existe, reproduce o pausa la melodía
+            if (audioPlayer.src) {
+                if (audioPlayer.paused) {
+                    audioPlayer.play();
+                } else {
+                    audioPlayer.pause();
+                }
+            } else {
+                // Si no hay melodía, reproduce la primera melodía
+                playMelodyAtIndex(0);
+            }
+        });
+
+        let currentMelodyIndex = 0; // Declaración de la variable en el ámbito global
+
+        // Función para reproducir la melodía en el índice especificado
+        function playMelodyAtIndex(index) {
+            if (index >= 0 && index < playButtons.length) {
+                playButtons[index].click(); // Simula el clic en el botón de reproducción
+            }
+        }
+
+        // Maneja el clic en el botón "prev"
+        document.getElementById('btnPrev').addEventListener('click', function () {
+            currentMelodyIndex = (currentMelodyIndex - 1 + playButtons.length) % playButtons.length;
+            playMelodyAtIndex(currentMelodyIndex);
+        });
+
+        // Maneja el clic en el botón "next"
+        document.getElementById('btnNext').addEventListener('click', function () {
+            currentMelodyIndex = (currentMelodyIndex + 1) % playButtons.length;
+            playMelodyAtIndex(currentMelodyIndex);
+        });
+
+
+        // Variable para rastrear la melodía actual y su estado
+        let currentMelodyId = null;
+        let currentMelodyState = 'paused';
+
+        playButtons.forEach(function (button) {
+            const audioSrc = button.getAttribute('data-src');
+            const melodyId = button.getAttribute('data-melody-id');
+            const melodyTitle = button.getAttribute('data-title');
+
+            button.addEventListener('click', function () {
+                document.querySelector('.mel').innerHTML = melodyTitle;
+
+                // Obtiene la fila correspondiente al botón
+                const row = button.closest('tr');
+
+                if (melodyId === currentMelodyId) {
+                    // Si se hace clic en el botón de la melodía actual
+                    if (currentMelodyState === 'paused') {
+                        // Si la melodía actual está pausada, reanúdala
+                        audioPlayer.play();
+                        currentMelodyState = 'playing';
+
+                        row.classList.add('table-active');
+
+                        const icon = button.querySelector('.melody-playing');
+                        icon.innerHTML = '<i class="fas fa-pause"></i>';
+                        document.getElementById('btnPlay').innerHTML = '<i class="fas fa-pause"></i>';
+
+                    } else {
+                        // Si la melodía actual se está reproduciendo, páusela
+                        audioPlayer.pause();
+                        currentMelodyState = 'paused';
+
+                        // Quita la clase de fila seleccionada
+                        row.classList.remove('table-active');
+
+                        const icon = button.querySelector('.melody-playing');
+                        icon.innerHTML = '<i class="fas fa-play"></i>';
+                        document.getElementById('btnPlay').innerHTML = '<i class="fas fa-play"></i>';
+
+                    }
+                } else {
+                    // Si se hace clic en una nueva melodía
+                    currentMelodyId = melodyId;
+                    currentMelodyState = 'playing';
+
+                    // Pausa todas las demás melodías y quita la clase de fila seleccionada de otras filas
+                    playButtons.forEach(function (otherButton) {
+                        if (otherButton !== button) {
+                            const otherRow = otherButton.closest('tr');
+                            otherRow.classList.remove('table-active');
+                            const icon = otherButton.querySelector('.melody-playing');
+                            icon.innerHTML = '<i class="fas fa-play"></i>';
+                            document.getElementById('btnPlay').innerHTML = '<i class="fas fa-pause"></i>';
+
+                        }
+                    });
+
+                    // Inicia la reproducción de la nueva melodía y muestra el icono de pausa
+                    audioPlayer.src = audioSrc;
+                    audioPlayer.play();
+                    row.classList.add('table-active');
+                    const icon = button.querySelector('.melody-playing');
+                    icon.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+            });
+        });
+
+        // Modifica el código para manejar el clic en el botón "Play" personalizado
+        audioPlayer.addEventListener('play', function () {
+            currentMelodyState = 'playing';
+            const currentPlayButton = document.querySelector(`[data-melody-id="${currentMelodyId}"]`);
+            const icon = currentPlayButton.querySelector('.melody-playing');
+            icon.innerHTML = '<i class="fas fa-pause"></i>';
+            document.getElementById('btnPlay').innerHTML = '<i class="fas fa-pause"></i>';
+
+        });
+
+        // Modifica el código para manejar el clic en el botón "Pause" personalizado
+
+        audioPlayer.addEventListener('pause', function () {
+            currentMelodyState = 'paused';
+            const currentPlayButton = document.querySelector(`[data-melody-id="${currentMelodyId}"]`);
+            const icon = currentPlayButton.querySelector('.melody-playing');
+            icon.innerHTML = '<i class="fas fa-play"></i>';
+            document.getElementById('btnPlay').innerHTML = '<i class="fas fa-play"></i>';
+
+        });
+
+        // Agrega un evento para cambiar el botón al icono "play" cuando la canción finaliza
+        audioPlayer.addEventListener('ended', function () {
+            playButtons.forEach(function (button) {
+                const icon = button.querySelector('.melody-playing');
+                icon.innerHTML = '<i class="fas fa-play"></i>';
+                const row = button.closest('tr');
+                row.classList.remove('table-active');
+            });
+
+            // Encuentra el botón de reproducción de la melodía actual
+            const currentPlayButton = document.querySelector(`[data-melody-id="${currentMelodyId}"]`);
+
+            // Encuentra el siguiente botón de reproducción
+            const nextPlayButton = currentPlayButton.closest('tr').nextElementSibling.querySelector('.play-button');
+
+            if (nextPlayButton) {
+                // Si hay una siguiente melodía, reproduce automáticamente
+                nextPlayButton.click();
+            } else {
+                // Si no hay siguiente melodía, detén la reproducción
+                audioPlayer.pause();
+                currentMelodyState = 'paused';
+            }
+        });
+    });
+
+</script>
+
+{% endblock %}

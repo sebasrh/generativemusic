@@ -155,7 +155,7 @@ class representation:
         midi = f"{folder}/{midi_file}"
 
         # Ruta del soundfont a utilizar 
-        soundfont_path = "algorithm/Chorium/Chorium_fork.sf2"
+        soundfont_path = "Chorium/Chorium_fork.sf2"
 
         # Convierte el archivo MIDI en un archivo MP3
         mp3, final_duration = convert_midi_to_mp3(midi, soundfont_path)
