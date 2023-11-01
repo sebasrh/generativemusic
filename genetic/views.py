@@ -108,12 +108,14 @@ def delete_genetic(request, album_id):
             # Eliminar los archivos de la carpeta midi_out
             folder_pop = f"algorithm/midi_out/{album.id}/"
             if os.path.exists(folder_pop):
+                print(folder_pop, "eliminado")
                 # eliminar la carpeta aunque no esté vacía
                 shutil.rmtree(f"{folder_pop}")
 
             # Eliminar el album de la carpeta media/melodies
             folder_album = f"media/melodies/{album.id}/"
             if os.path.exists(folder_album):
+                print(folder_album, "eliminado")
                 # eliminar la carpeta aunque no esté vacía
                 shutil.rmtree(f"{folder_album}")
 

@@ -176,6 +176,8 @@ class representation:
         mel.save()
         album.melodies.add(mel)
 
+        print("Melodía generada", "midi:", midi, "mp3:", mp3, "eliminados")
+        print("")
         # Remueve los archivos temporales
         os.remove(midi)
         os.remove(mp3)

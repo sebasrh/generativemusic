@@ -4,7 +4,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse
 from .forms import GeneratedMusicImageForm
 from .models import GeneratedMusicAlbum
-
+import os
+import shutil
 from Neural.predict import generatemusic
 # Create your views here.
 
@@ -14,7 +15,7 @@ def rnn(request):
     user = request.user
     if user.is_superuser and request.method == 'POST':
 
-        generatemusic(25, 20)
+        generatemusic(25, 20) # 25 notas, 20 melodías
 
         return redirect('rnn')
 
@@ -55,7 +56,14 @@ def delete_rnn(request, album_id):
         try:
             album = get_object_or_404(GeneratedMusicAlbum, pk=album_id)
 
+            # Eliminar el album de la carpeta media
+            folder_album = f'media/midi_files/{album.id}'
+            if os.path.exists(folder_album):
+                print("Eliminando carpeta del album", folder_album)
+                shutil.rmtree(folder_album)
+
             # Eliminar el album de la base de datos
+            album.generated_music.all().delete()
             album.delete()
 
             return redirect('rnn')

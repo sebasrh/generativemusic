@@ -56,6 +56,12 @@ def generatemusic(number_of_notes, number_of_compositions):
 
         album.save()
 
+        print("Melodías generadas", "Contador eliminado")
+        print("")
+
+        # Delete the counter file
+        os.remove("Neural/counter")
+
     except Exception as e:
         print(f"An error occurred while generating music: {str(e)}")
 
@@ -201,18 +207,19 @@ def save_midi(midi_stream, album):
             with open(counter_file, 'rb') as f:
                 counter = int(pickle.load(f))
 
-        # Increment the counter
-        counter += 1
-
         # Save the updated counter
         with open(counter_file, 'wb') as f:
             pickle.dump(counter, f)
 
         # Build file paths
-        file_name = f'New Composition {counter}'
+        file_name = f'melody {counter}'
         file_path = file_name.replace(" ", "_")
-        file_midi = os.path.join(
-            'media/midi_files/', file_path + '.mid')
+        file_midi = f'media/midi_files/{album}/{file_path}.mid'
+
+        # Create the folder if it doesn't exist
+        folder_album = f'media/midi_files/{album}'
+        if not os.path.exists(folder_album):
+            os.makedirs(folder_album)
 
         # save midi to file
         midi_stream.write('midi', fp=file_midi)
@@ -241,6 +248,16 @@ def save_midi(midi_stream, album):
         )
 
         new_audio.save()
+
+        # Increment the counter
+        counter += 1
+
+        print("Melodía generada", "midi:", file_midi, "mp3:", mp3, "eliminados")
+        print("")
+
+        # Delete the generated files 
+        os.remove(file_midi)
+        os.remove(mp3)
 
         return new_audio
 
