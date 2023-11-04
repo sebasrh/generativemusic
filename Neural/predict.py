@@ -44,7 +44,9 @@ def generatemusic(number_of_notes, number_of_compositions):
         album = GeneratedMusicAlbum.objects.create()
         album.epoch = 136
 
-        for _ in range(number_of_compositions):
+        i = 1
+
+        while i <= number_of_compositions:
             prediction_output = generate_notes(
                 model, network_input, pitchnames, n_vocab, number_of_notes)
 
@@ -53,6 +55,8 @@ def generatemusic(number_of_notes, number_of_compositions):
             generated_music = save_midi(midi_stream, album.id)
 
             album.generated_music.add(generated_music)
+
+            i += 1
 
         album.save()
 
@@ -116,7 +120,6 @@ def create_network(network_input, n_vocab):
     # Load the weights to each node
     model.load_weights(
         'Neural/weights-improvement-136-0.8655-bigger.hdf5')
-
     return model
 
 
@@ -213,6 +216,8 @@ def save_midi(midi_stream, album):
 
         # Build file paths
         file_name = f'melody {counter}'
+        # Increment the counter
+        counter += 1
         file_path = file_name.replace(" ", "_")
         file_midi = f'media/midi_files/{album}/{file_path}.mid'
 
@@ -249,8 +254,7 @@ def save_midi(midi_stream, album):
 
         new_audio.save()
 
-        # Increment the counter
-        counter += 1
+        
 
         print("Melodía generada", "midi:", file_midi, "mp3:", mp3, "eliminados")
         print("")

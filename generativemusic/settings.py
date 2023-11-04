@@ -31,9 +31,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
-
-ALLOWED_HOSTS = []
+#DEBUG = 'RENDER' not in os.environ
+DEBUG = True 
+ALLOWED_HOSTS = ['*']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'generativemusic.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Feel free to alter this value to suit your needs.
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        default='postgres://genmusicdb_vkg6_user:xWFxXGDZk6ikk9kvqHCzpNPouYQfDOMg@dpg-cl1b5h24i3ns73cfih80-a.oregon-postgres.render.com/genmusicdb_vkg6',
         conn_max_age=600
     )
 }

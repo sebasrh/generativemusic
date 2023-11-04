@@ -8,6 +8,7 @@ pip install tensorflow
 pip install tensorflow[and-cuda]
 pip install keras
 pip install music21
+pip install deap
 pip install -r requirements.txt 
 
 python manage.py collectstatic --no-input

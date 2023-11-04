@@ -376,9 +376,9 @@
                     <div class="d-flex justify-content-start align-items-end">
                         <img class="img img-fluid" src="/static/image/top.png" alt="playlist" style="height: 100%;" />
                         <div class="album w-100">
-                            <div class="title-album">Top 10</div>
+                            <div class="title-album">Top</div>
                             <span class="text-album mb-0"> Playlist •
-                                Piezas musicales más populares</span>
+                                Las mejores Piezas Musicales</span>
                         </div>
                     </div>
                 </div>
@@ -400,6 +400,7 @@
                             <th class="option" scope="col"></th>
                             <th scope="col">Título</th>
                             <th scope="col">Álbum</th>
+                            <th scope="col">Generación</th>
                             <th class="average-col" scope="col">Promedio</th>
                         </tr>
                     </thead>
@@ -428,7 +429,14 @@
                             <td class="align-middle melody-album">
                                 <span class="">
                                     <!--Album al que pertenece la melodía-->
-                                    Álbum {{ melody.album.id }}
+                                    {{ melody.album.id }}
+                                </span>
+                            </td>
+
+                            <td class="align-middle melody-album">
+                                <span class="">
+                                    <!--Album al que pertenece la melodía-->
+                                    {{ melody.generation }}
                                 </span>
                             </td>
 

@@ -46,7 +46,7 @@ def load_population(album):
     folder = f"algorithm/midi_out/{album.id}"
 
     # Nombre del archivo pickle
-    file_name = f"{folder}/population_{album.generation_number}.pkl"
+    file_name = f"{folder}/population_{album.generation_number - 1}.pkl"
 
     # Cargar la población desde el archivo pickle
     with open(file_name, "rb") as file:
@@ -287,18 +287,32 @@ def evolve(request, album_id):
                 # Cargar la población actual
                 population = load_population(album)
 
-                # Obtener todas las melodías
-                mels = album.melodies.all()
+                # Obtener todas las melodías de la población actual (la ultima generación)
+                mels = album.melodies.filter(
+                    generation=album.generation_number).order_by('created_at')
 
-                # Lista de promedios de calificaciones de melodías en mels (GeneratedMelody)
-                avg_ratings = [mel.average_ratings for mel in mels]
+                # Convertir las melodías a una lista
+                mels = list(mels)
+                e_population = []
 
-                # Asignar el promedio de calificaciones como fitness a cada melodía en la población
-                for ind, avg_rating in zip(population, avg_ratings):
-                    ind.fitness.values = (avg_rating,)
+                # Calcular la calificación promedio de cada melodía y asignarla a la
+                # propiedad fitness.values de cada melodía en la población actual
+                for i in range(len(mels)):
+                    population[i].fitness.values = (mels[i].average_ratings,)
+                    e_population.append(population[i])
+                    print('melody fitness: ')
+                    print(mels[i].average_ratings)
+                    print('population fitness: ')
+                    print(population[i].fitness.values)
+
+                for i in range(len(e_population)):
+                    print(e_population[i].fitness.values, end=" ")
 
                 # Evolucionar la población actual y obtener la nueva población
-                new_pop = evolve_population(population, alg_args)
+                new_pop = evolve_population(e_population, alg_args)
+
+                # Guardar la nueva población
+                save_population(new_pop, album)
 
                 # Actualizar el número de generación
                 album.increase_generation_number()
@@ -307,9 +321,6 @@ def evolve(request, album_id):
                 for melody in new_pop:
                     representation.generate_melody(
                         rep_obj, melody, album)
-
-                # Guardar la nueva población
-                save_population(new_pop, album)
 
                 return redirect('generations', album_id=album_id)
         except Exception as e:
@@ -325,37 +336,29 @@ def evolve(request, album_id):
         return redirect('index')
 
 
-# Vista de las 10 mejores melodías de todos los albums
+# Vista de la mejor melodía de un álbum en la última generación de melodías
 @login_required
 def top_rated(request):
     if request.method == 'GET':
         # Obtener todos los albums
         albums = Album.objects.all()
 
-        # Obtener todas las melodías de todos los albums
+        # Obtener las melodías de la última generación de cada álbum
         melodies = []
-
-        # Iterar sobre los albums y obtener todas las melodías
         for album in albums:
-            melodies += album.melodies.all()
-
-        # Obtener las melodías calificadas
-        top_rated_melodies = [
-            mel for mel in melodies if mel.average_ratings > 0.0]
+            melodies.append(album.melodies.filter(
+                generation=album.generation_number).order_by('-average_ratings').first())
 
         # Ordenar las melodías por calificación promedio y número de calificaciones
-        top_rated_melodies.sort(key=lambda x: (
+        top_rated = sorted(melodies, key=lambda x: (
             x.average_ratings, x.user_rating.all().count()), reverse=True)
 
-        # Obtener las 10 mejores melodías
-        top_rated_melodies = top_rated_melodies[:10]
-
         # Obtener el álbum de cada melodía
-        for melody in top_rated_melodies:
+        for melody in top_rated:
             melody.album = melody.album_set.first()
 
         # Si no hay melodías, mostrar un mensaje
-        if not top_rated_melodies:
+        if not top_rated:
             return render(request, 'top_rated.html', {'message': 'No hay piezas calificadas'})
 
-        return render(request, 'top_rated.html', {'melodies': top_rated_melodies})
+        return render(request, 'top_rated.html', {'melodies': top_rated})

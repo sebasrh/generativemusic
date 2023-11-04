@@ -15,7 +15,7 @@ def rnn(request):
     user = request.user
     if user.is_superuser and request.method == 'POST':
 
-        generatemusic(25, 20) # 25 notas, 20 melodías
+        generatemusic(25, 10) # 25 notas, 20 melodías
 
         return redirect('rnn')
 

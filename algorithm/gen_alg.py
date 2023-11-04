@@ -110,9 +110,9 @@ def evolve_population(population, alg_args):
     Salida: population: list, una lista de melodías
     """
 
-    for ind in population:
-        print('poblacion')
-        print(ind.fitness.values)
+    for i in range(len(population)):
+        print('individuo')
+        print(population[i].fitness.values)
 
     toolbox.register("mate", cx_music)  # Cruce
     toolbox.register("mutate", mut_melody)  # Mutación
