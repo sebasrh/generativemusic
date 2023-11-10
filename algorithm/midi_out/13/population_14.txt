@@ -1,0 +1,520 @@
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: F4# | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: F4# | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: E5 | Beats: 1.0 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4 | Beats: 0.25 | Velocity: 64
+Pitch: C5 | Beats: 2.0 | Velocity: 53
+Pitch: C5# | Beats: 0.5 | Velocity: 64
+Pitch: F4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: E5 | Beats: 1.0 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4 | Beats: 0.25 | Velocity: 64
+Pitch: C5 | Beats: 2.0 | Velocity: 53
+Pitch: C5# | Beats: 0.5 | Velocity: 64
+Pitch: F4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: E5 | Beats: 1.0 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4 | Beats: 0.25 | Velocity: 64
+Pitch: C5 | Beats: 2.0 | Velocity: 53
+Pitch: C5# | Beats: 0.5 | Velocity: 64
+Pitch: F4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: F5 | Beats: 1.0 | Velocity: 80
+Pitch: B4 | Beats: 0.5 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: F4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: A4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: D4# | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: E4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: F4# | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: E5 | Beats: 1.0 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4 | Beats: 0.25 | Velocity: 64
+Pitch: C5 | Beats: 2.0 | Velocity: 53
+Pitch: C5# | Beats: 0.5 | Velocity: 64
+Pitch: F4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: F5 | Beats: 1.0 | Velocity: 80
+Pitch: B4 | Beats: 0.5 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: F4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: A4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: D4# | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: E4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: E5 | Beats: 1.0 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4 | Beats: 0.25 | Velocity: 64
+Pitch: C5 | Beats: 2.0 | Velocity: 53
+Pitch: C5# | Beats: 0.5 | Velocity: 64
+Pitch: F4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: F4# | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: F4# | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: F5 | Beats: 1.0 | Velocity: 80
+Pitch: B4 | Beats: 0.5 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: F4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: A4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: D4# | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: E4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: E5 | Beats: 1.0 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4 | Beats: 0.25 | Velocity: 64
+Pitch: C5 | Beats: 2.0 | Velocity: 53
+Pitch: C5# | Beats: 0.5 | Velocity: 64
+Pitch: F4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: E5 | Beats: 1.0 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4 | Beats: 0.25 | Velocity: 64
+Pitch: C5 | Beats: 2.0 | Velocity: 53
+Pitch: C5# | Beats: 0.5 | Velocity: 64
+Pitch: F4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: E5 | Beats: 1.0 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4 | Beats: 0.25 | Velocity: 64
+Pitch: C5 | Beats: 2.0 | Velocity: 53
+Pitch: C5# | Beats: 0.5 | Velocity: 64
+Pitch: F4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: F5 | Beats: 1.0 | Velocity: 80
+Pitch: B4 | Beats: 0.5 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: F4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: A4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: D4# | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: E4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: F5 | Beats: 1.0 | Velocity: 80
+Pitch: B4 | Beats: 0.5 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: F4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: A4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: D4# | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: E4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: A5 | Beats: 1.0 | Velocity: 80
+Pitch: D5# | Beats: 0.5 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: B4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: B4 | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: F5# | Beats: 1.0 | Velocity: 80
+Pitch: C5# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: D5 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: D4 | Beats: 0.25 | Velocity: 64
+Pitch: D5 | Beats: 2.0 | Velocity: 53
+Pitch: F5 | Beats: 0.5 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+
+Melody:
+Notes in Measure:
+Pitch: F5# | Beats: 2.0 | Velocity: 96
+Pitch: G5 | Beats: 1.0 | Velocity: 80
+Pitch: C5# | Beats: 0.5 | Velocity: 80
+Pitch: D5# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: G4# | Beats: 1.0 | Velocity: 64
+Pitch: G4 | Beats: 0.25 | Velocity: 80
+Pitch: F5 | Beats: 0.25 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Notes in Measure:
+Pitch: D5# | Beats: 1.0 | Velocity: 80
+Pitch: G4# | Beats: 0.25 | Velocity: 80
+Pitch: Rest | Beats: 2.0 | Velocity: 64
+Pitch: Rest | Beats: 0.5 | Velocity: 80
+Pitch: A4 | Beats: 0.25 | Velocity: 53
+Notes in Measure:
+Pitch: Rest | Beats: 1.0 | Velocity: 64
+Pitch: C4# | Beats: 0.25 | Velocity: 64
+Pitch: C5# | Beats: 2.0 | Velocity: 53
+Pitch: D5 | Beats: 0.5 | Velocity: 64
+Pitch: F4# | Beats: 0.25 | Velocity: 80
+

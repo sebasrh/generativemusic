@@ -461,7 +461,11 @@
                             <th class="text-center number-col" scope="col">#</th>
                             <th class="option" scope="col"></th>
                             <th scope="col">Título</th>
+                            {% with generation=melodies.0.generation %}
+                            {% if generation < 15 %}
                             <th class="rate-col" scope="col">Calificar</th>
+                            {% endif %}
+                            {% endwith %}
                             <th class="average-col" scope="col">Promedio</th>
                         </tr>
                     </thead>
@@ -488,8 +492,8 @@
                                     {{ melody.title }}
                                 </span>
                             </td>
-
-
+                            {% with generation=melody.generation %}
+                            {% if generation < 15 %}
                             <td class="align-middle">
                                 <form style="width: min-content;" class="rate-form" data-melody-id="{{ melody.id }}"
                                     data-user-has-rated="{% if melody.user_has_rated %}true{% else %}false{% endif %}">
@@ -505,7 +509,8 @@
                                     </div>
                                 </form>
                             </td>
-
+                            {% endif %}
+                            {% endwith %}
                             <td class="align-middle average-row">
                                 <div class="info-rating">
                                     <span class="average-ratings">
