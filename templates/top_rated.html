@@ -161,6 +161,7 @@
 
     .starss {
         font-size: 0.8rem;
+
     }
 
     .audio-bar {
@@ -326,7 +327,7 @@
             font-size: 1.6rem;
         }
 
-        .starss {
+        .starss i {
             font-size: 0.6rem;
         }
 
@@ -401,6 +402,7 @@
                             <th scope="col">Título</th>
                             <th scope="col">Álbum</th>
                             <th scope="col">Generación</th>
+                            <th scope="col">Calificación</th> <!-- Calificación -->
                         </tr>
                     </thead>
                     <tbody class="border-top body-table">
@@ -437,6 +439,32 @@
                                     <!--Album al que pertenece la melodía-->
                                     {{ melody.generation }}
                                 </span>
+                            </td>
+
+                            <td class="align-middle average-row">
+                                <div class="info-rating">
+                                    <span class="average-ratings">
+                                        {{ melody.average_ratings }}
+                                    </span>
+                                    <div class="starss">
+                                        {% with average_rating=melody.average_ratings|floatformat:"0" %}
+                                        {% for i in "12345"|make_list %}
+                                        {% if i <= average_rating %} <i class="fa fa-star full"></i>
+                                            {% else %}
+                                            <i class="fa fa-star empty"></i>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endwith %}
+                                    </div>
+                                    <div class="py-1">
+                                        <div class="text-muted users">
+                                            <i class="fa-solid fa-users me-1"></i>
+                                            <span class="user_rating">
+                                                {{ melody.user_rating.all.count }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}

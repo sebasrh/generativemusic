@@ -46,7 +46,7 @@ def load_population(album):
     folder = f"algorithm/midi_out/{album.id}"
 
     # Nombre del archivo pickle
-    file_name = f"{folder}/population_13.pkl"
+    file_name = f"{folder}/population_{album.generation_number}.pkl"
 
     # Cargar la población desde el archivo pickle
     with open(file_name, "rb") as file:
@@ -343,21 +343,25 @@ def top_rated(request):
         # Obtener todos los albums
         albums = Album.objects.all()
 
-        # Obtener la última generación de melodías de cada álbum
+       # Obtener las melodías de la última generación de cada álbum
         melodies = []
         for album in albums:
-            # Obtener las melodías de la última generación
-            mels = album.melodies.filter(
-                generation=album.generation_number).order_by('created_at')
-            
-            # Si hay melodías, agregarlas a la lista y asignar el álbum a cada melodía
-            if mels:
-                for mel in mels:
-                    mel.album = album
-                melodies.extend(mels)        
+            melodies.append(album.melodies.filter(
+                generation=album.generation_number).order_by('-average_ratings').first())
+
+        # solo las melodías que tienen calificaciones
+        melodies = [melody for melody in melodies if melody.average_ratings != 0.0]
+
+        # Ordenar las melodías por calificación promedio y número de calificaciones
+        top_rated = sorted(melodies, key=lambda x: (
+            x.average_ratings, x.user_rating.all().count()), reverse=True)
+
+        # Obtener el álbum de cada melodía
+        for melody in top_rated:
+            melody.album = melody.album_set.first()
 
         # Si no hay melodías, mostrar un mensaje
-        if not melodies:
+        if not top_rated:
             return render(request, 'top_rated.html', {'message': 'No hay piezas calificadas'})
 
-        return render(request, 'top_rated.html', {'melodies': melodies})
+        return render(request, 'top_rated.html', {'melodies': top_rated})
