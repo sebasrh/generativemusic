@@ -42,4 +42,4 @@ El proyecto está desplegado en [Render](https://render.com/). Asegúrate de con
 En este archivo se encuentran todos los anexos del trabajo escrito para descargar.
 
 ## Contacto
-En caso de experimentar algún problema, no dudes en ponerte en contacto escribiendo a [sebastian.hidalgo@correounivalle.edu.co](sebastian.hidalgo@correounivalle.edu.co). Se proporcionará asistencia para garantizar un acceso sin inconvenientes a la aplicación.
+En caso de experimentar algún problema, no dudes en ponerte en contacto escribiendo a [sebastian.hidalgo@correounivalle.edu.co](mailto:sebastian.hidalgo@correounivalle.edu.co). Se proporcionará asistencia para garantizar un acceso sin inconvenientes a la aplicación.
